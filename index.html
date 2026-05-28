@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monitor | Gestores Alternativos</title>
+  <style>
+    :root {
+      --bg:#f0f2f7; --surface:#fff; --surface2:#f7f8fc; --border:#e2e6f0;
+      --text:#1c2333; --text2:#5a6480; --accent:#2563eb; --accent-bg:#eff6ff;
+      --header-bg:#0f172a; --header-fg:#e2e8f0;
+      --shadow:0 2px 12px rgba(0,0,0,.08); --radius:10px;
+      --red:#dc2626; --red-bg:#fef2f2; --red-border:#fecaca;
+      --yellow:#d97706; --yellow-bg:#fffbeb; --yellow-border:#fde68a;
+      --green:#16a34a; --green-bg:#f0fdf4; --green-border:#bbf7d0;
+    }
+    [data-theme="dark"] {
+      --bg:#0d1117; --surface:#161b22; --surface2:#1c2128; --border:#30363d;
+      --text:#e6edf3; --text2:#8b949e; --accent:#58a6ff; --accent-bg:#1c2d41;
+      --header-bg:#010409; --header-fg:#c9d1d9; --shadow:0 2px 12px rgba(0,0,0,.4);
+      --red:#f87171; --red-bg:#2a1515; --red-border:#7f1d1d;
+      --yellow:#fbbf24; --yellow-bg:#2a2010; --yellow-border:#78350f;
+      --green:#4ade80; --green-bg:#102010; --green-border:#14532d;
+    }
+
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; transition:background .25s,color .25s; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    /* ── Header ── */
+    header { background:var(--header-bg); color:var(--header-fg); padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.3); }
+    .header-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px; }
+    .logo { font-size:1rem; font-weight:700; letter-spacing:.02em; white-space:nowrap; display:flex; align-items:center; gap:9px; }
+    .logo span { opacity:.5; font-weight:400; font-size:.8rem; }
+    .header-right { display:flex; align-items:center; gap:10px; }
+    #date-badge { font-size:.75rem; background:rgba(255,255,255,.1); border-radius:20px; padding:3px 10px; white-space:nowrap; }
+    .theme-btn { background:rgba(255,255,255,.12); border:none; color:var(--header-fg); border-radius:6px; width:34px; height:34px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+    .theme-btn:hover { background:rgba(255,255,255,.22); }
+
+    /* ── Layout ── */
+    main { max-width:1100px; margin:0 auto; padding:28px 20px 60px; }
+
+    /* ── Stats ── */
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); gap:12px; margin-bottom:24px; }
+    .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:14px 18px; box-shadow:var(--shadow); }
+    .s-label { font-size:.72rem; color:var(--text2); text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
+    .s-value { font-size:1.65rem; font-weight:800; }
+    .stat-card.c-total .s-value { color:var(--accent); }
+    .stat-card.c-red   .s-value { color:var(--red); }
+    .stat-card.c-yel   .s-value { color:var(--yellow); }
+    .stat-card.c-grn   .s-value { color:var(--green); }
+
+    /* ── Controls ── */
+    .controls { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:14px 18px; box-shadow:var(--shadow); margin-bottom:16px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+    .search-wrap { position:relative; flex:1; min-width:180px; }
+    .search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text2); pointer-events:none; font-size:.9rem; }
+    #search { width:100%; padding:8px 10px 8px 30px; border:1px solid var(--border); border-radius:7px; background:var(--surface2); color:var(--text); font-size:.88rem; outline:none; transition:border-color .2s; }
+    #search:focus { border-color:var(--accent); }
+
+    .sep { width:1px; height:26px; background:var(--border); flex-shrink:0; }
+
+    .fg { display:flex; gap:5px; flex-wrap:wrap; align-items:center; }
+    .fg-label { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text2); white-space:nowrap; margin-right:2px; }
+
+    .chip { padding:5px 12px; border-radius:20px; border:1.5px solid var(--border); background:var(--surface2); color:var(--text2); font-size:.78rem; font-weight:600; cursor:pointer; transition:all .15s; user-select:none; white-space:nowrap; }
+    .chip:hover { border-color:var(--accent); color:var(--accent); }
+    .chip.on { color:#fff; border-color:transparent; }
+    .chip.on.sev-neg { background:linear-gradient(90deg,var(--red) 0%,var(--yellow) 100%); }
+    .chip.on.sev-all { background:#64748b; }
+    .chip.on.sev-red { background:var(--red); }
+    .chip.on.sev-yel { background:var(--yellow); }
+    .chip.on.sev-grn { background:var(--green); }
+    .chip.on.per     { background:#7c3aed; }
+    .chip.on.mgr     { background:var(--accent); }
+
+    .rc { font-size:.78rem; color:var(--text2); margin-left:auto; white-space:nowrap; }
+
+    /* ── Period banner ── */
+    .pbanner { background:var(--accent-bg); border:1px solid rgba(37,99,235,.3); border-radius:8px; padding:9px 14px; font-size:.82rem; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .pbanner.hidden { display:none; }
+
+    /* ── Cards ── */
+    .cards-list { display:flex; flex-direction:column; gap:10px; }
+    .news-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; transition:transform .15s,box-shadow .15s; }
+    .news-card:hover { transform:translateY(-1px); box-shadow:0 4px 20px rgba(0,0,0,.12); }
+    .news-card.hidden { display:none; }
+
+    .cbar { width:5px; flex-shrink:0; }
+    .cbar.red    { background:var(--red); }
+    .cbar.yellow { background:var(--yellow); }
+    .cbar.green  { background:var(--green); }
+
+    .ci { padding:15px 20px; flex:1; min-width:0; }
+    .ct { display:flex; align-items:flex-start; gap:8px; margin-bottom:5px; flex-wrap:wrap; }
+
+    .bsev { font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; border-radius:4px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
+    .bsev.red    { background:var(--red-bg);    color:var(--red);    border:1px solid var(--red-border);    }
+    .bsev.yellow { background:var(--yellow-bg); color:var(--yellow); border:1px solid var(--yellow-border); }
+    .bsev.green  { background:var(--green-bg);  color:var(--green);  border:1px solid var(--green-border);  }
+
+    .bmgr { font-size:.65rem; font-weight:600; background:var(--accent-bg); color:var(--accent); border:1px solid var(--accent); border-radius:4px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
+    .bnew { font-size:.65rem; font-weight:700; background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:4px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
+
+    .card-title { font-size:.96rem; font-weight:700; color:var(--text); line-height:1.38; flex:1; }
+    .card-meta  { font-size:.74rem; color:var(--text2); margin-bottom:7px; }
+    .card-body  { font-size:.875rem; color:var(--text2); line-height:1.6; }
+    .card-body strong { color:var(--text); }
+    .card-src   { margin-top:9px; font-size:.74rem; display:flex; gap:7px; flex-wrap:wrap; color:var(--text2); }
+    .card-src a { color:var(--accent); }
+
+    /* ── Empty ── */
+    #empty { display:none; text-align:center; padding:60px 20px; color:var(--text2); }
+    #empty svg { margin-bottom:12px; opacity:.25; }
+    #empty p { font-size:.9rem; }
+
+    /* ── Footer ── */
+    footer { text-align:center; font-size:.74rem; color:var(--text2); padding:24px 20px 32px; line-height:1.7; }
+
+    @media(max-width:640px){
+      .logo span { display:none; }
+      .stats-grid { grid-template-columns:repeat(2,1fr); }
+      .sep { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">📊 Monitor de Noticias <span>/ Gestores Alternativos Internacionales</span></div>
+    <div class="header-right">
+      <div id="date-badge">Actualizado: 27 mayo 2026</div>
+      <button class="theme-btn" id="themeBtn" title="Modo oscuro">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Estadísticas -->
+  <div class="stats-grid">
+    <div class="stat-card c-total"><div class="s-label">Total noticias</div><div class="s-value" id="cnt-total">0</div></div>
+    <div class="stat-card c-red">  <div class="s-label">⚠ Graves</div>     <div class="s-value" id="cnt-red">0</div></div>
+    <div class="stat-card c-yel">  <div class="s-label">! Atención</div>    <div class="s-value" id="cnt-yellow">0</div></div>
+    <div class="stat-card c-grn">  <div class="s-label">✓ Normales</div>   <div class="s-value" id="cnt-green">0</div></div>
+  </div>
+
+  <!-- Controles -->
+  <div class="controls">
+
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Buscar en noticias…" autocomplete="off"/>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- Prioridad -->
+    <div class="fg">
+      <span class="fg-label">Prioridad</span>
+      <div class="chip on sev-neg" data-f="severity" data-v="negative">🔴🟡 Negativas</div>
+      <div class="chip sev-all"    data-f="severity" data-v="all">Todas</div>
+      <div class="chip sev-red"    data-f="severity" data-v="red">⚠ Grave</div>
+      <div class="chip sev-yel"    data-f="severity" data-v="yellow">! Atención</div>
+      <div class="chip sev-grn"    data-f="severity" data-v="green">✓ Normal</div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- Período -->
+    <div class="fg">
+      <span class="fg-label">Período</span>
+      <div class="chip per on" data-f="period" data-v="all">Todo</div>
+      <div class="chip per"    data-f="period" data-v="current">Esta semana</div>
+      <div class="chip per"    data-f="period" data-v="previous">Sem. anterior</div>
+      <div class="chip per"    data-f="period" data-v="month">Último mes</div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- Gestor -->
+    <div class="fg">
+      <span class="fg-label">Gestor</span>
+      <div class="chip mgr on"  data-f="manager" data-v="all">Todos</div>
+      <div class="chip mgr"     data-f="manager" data-v="brookfield">Brookfield</div>
+      <div class="chip mgr"     data-f="manager" data-v="ares">Ares</div>
+      <div class="chip mgr"     data-f="manager" data-v="oaktree">Oaktree</div>
+      <div class="chip mgr"     data-f="manager" data-v="lexington">Lexington</div>
+    </div>
+
+    <div class="rc" id="rc"></div>
+  </div>
+
+  <!-- Banner de período activo -->
+  <div class="pbanner hidden" id="pbanner">📅 <strong id="prange"></strong></div>
+
+  <!-- Tarjetas -->
+  <div class="cards-list" id="cards"></div>
+
+  <div id="empty">
+    <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+        d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+    </svg>
+    <p>No hay noticias con los filtros seleccionados.</p>
+  </div>
+
+</main>
+
+<footer>
+  Para actualizar las noticias cada semana: abre Claude Code en esta carpeta y escribe <strong>/update-news</strong><br/>
+  Fuentes habituales: Bloomberg · Yahoo Finance · Courthouse News · PitchBook · SEC EDGAR · GlobeNewswire · BusinessWire · Simply Wall St · Seeking Alpha
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   CONFIGURACIÓN — el agente actualiza esta fecha
+═══════════════════════════════════════════════════════ */
+const CURRENT_DATE = new Date("2026-05-27");
+
+/* ═══════════════════════════════════════════════════════
+   DATA START — el agente añade nuevas noticias AQUÍ ARRIBA
+═══════════════════════════════════════════════════════ */
+const NEWS = [
+
+  /* ══ BROOKFIELD ══════════════════════════════════════ */
+  {
+    id: 1,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "red",
+    title: "Demanda por fraude: ex-socio Raffaelli acusa de desvío de capital y represalia al whistleblower",
+    date: "12 de mayo de 2026", isoDate: "2026-05-12",
+    body: `Josh Raffaelli, ex-managing partner de Brookfield, presentó una demanda de 100 páginas acusando a la firma de <strong>desviar capital</strong> de los fondos que gestionaba para compensar pérdidas de su división de real estate comercial, de <strong>inflar artificialmente</strong> el balance de Pinegrove Capital Partners en más de $100M, y de <strong>limitar el acceso de clientes a xAI de Elon Musk</strong>. Raffaelli denunció ante la <strong>SEC a finales de 2024</strong> y fue despedido en diciembre. Brookfield niega todas las acusaciones.`,
+    sources: [
+      { label: "Courthouse News", url: "https://www.courthousenews.com/silicon-valley-investor-with-ties-to-elon-musk-accuses-brookfield-of-fraud-retaliation/" },
+      { label: "PitchBook", url: "https://pitchbook.com/news/articles/brookfield-venture-lawsuit-josh-raffaelli" }
+    ]
+  },
+  {
+    id: 2,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "yellow",
+    title: "Adquisición de Peakstone Realty: mayor exposición al real estate comercial en momento delicado",
+    date: "6 de mayo de 2026", isoDate: "2026-05-06",
+    body: `Brookfield completó la adquisición de Peakstone Realty Trust, ampliando su exposición al real estate comercial en el mismo momento en que la demanda Raffaelli señala pérdidas previas en esa área como detonante del supuesto desvío de capital.`,
+    sources: [{ label: "Brookfield", url: "https://bam.brookfield.com/events-news/press-releases" }]
+  },
+  {
+    id: 3,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "yellow",
+    title: "Emisión de $1.000M en deuda corporativa: notas a 2031 y reapertura de notas a 2036",
+    date: "14 de abril de 2026", isoDate: "2026-04-14",
+    body: `Brookfield anunció la emisión de $550M en notas con vencimiento 2031 y la reapertura de $450M en notas con vencimiento 2036. El incremento de deuda corporativa, en el contexto de la demanda activa, es un factor a monitorizar.`,
+    sources: [{ label: "Brookfield", url: "https://bam.brookfield.com/events-news/press-releases" }]
+  },
+  {
+    id: 4,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "green",
+    title: "Resultados Q1 2026 sólidos: en camino de ser el mayor año de captación histórico",
+    date: "8 de mayo de 2026", isoDate: "2026-05-08",
+    body: `Brookfield reportó resultados fuertes en Q1 2026. Los fondos co-gestionados (Primary Wave, 17Capital, Pinegrove) cerraron por encima de sus objetivos. La firma espera que 2026 sea el mayor año de captación de capital de su historia.`,
+    sources: [
+      { label: "Bloomberg", url: "https://www.bloomberg.com/news/newsletters/2026-05-08/brookfield-asset-management-s-safe-assets-have-strong-quarter" },
+      { label: "Seeking Alpha", url: "https://seekingalpha.com/article/4902789-brookfield-asset-management-2026-set-to-be-record-year-for-fee-bearing-capital-formation" }
+    ]
+  },
+  {
+    id: 5,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "green",
+    title: "Junta General Anual: los 12 consejeros reelegidos por unanimidad",
+    date: "7 de mayo de 2026", isoDate: "2026-05-07",
+    body: `En la junta anual de accionistas celebrada el 7 de mayo en Nueva York, los 12 candidatos propuestos para el Consejo de Administración fueron elegidos sin incidencias.`,
+    sources: [{ label: "GlobeNewswire", url: "https://www.globenewswire.com/news-release/2026/05/08/3291375/0/en/Brookfield-Asset-Management-Announces-Results-of-Annual-Meeting-of-Shareholders.html" }]
+  },
+  {
+    id: 6,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "green",
+    title: "Demanda 401(k) desestimada: Brookfield exonerada por rendimientos positivos",
+    date: "20 de marzo de 2026", isoDate: "2026-03-20",
+    body: `Un tribunal desestimó la demanda colectiva que cuestionaba los fondos target-date de American Century usados en el plan 401(k) de empleados. Los fondos obtuvieron rendimientos positivos y el tribunal consideró insuficiente el argumento de incumplimiento fiduciario.`,
+    sources: [{ label: "Bloomberg Law", url: "https://news.bloomberglaw.com/employee-benefits/brookfield-asset-management-cleared-in-401k-plan-fund-lawsuit" }]
+  },
+
+  /* ══ ARES ════════════════════════════════════════════ */
+  {
+    id: 7,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "red",
+    title: "ASIF bajo escrutinio: investigación por pérdidas de inversores y arbitrajes FINRA abiertos",
+    date: "26 de mayo de 2026", isoDate: "2026-05-26",
+    body: `El fondo Ares Strategic Income Fund (BDC no listado) está bajo escrutinio por cómo fue comercializado entre inversores minoristas. Bufetes especializados investigan pérdidas y hay <strong>arbitrajes FINRA activos</strong>. La SEC tiene foco en 2026 sobre transparencia de productos de crédito privado. Ares también <strong>elevó las comisiones máximas del prospecto</strong> (clase D de 1,5% a 2%; nuevo límite del 2% para clase I), generando críticas adicionales.`,
+    sources: [{ label: "The White Law Group", url: "https://whitesecuritieslaw.com/ares-strategic-income-fund-securities-investigation/" }]
+  },
+  {
+    id: 8,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "red",
+    title: "Ares recorta valoraciones de préstamos de software de Clearlake Capital por riesgo IA",
+    date: "28 de abril de 2026", isoDate: "2026-04-28",
+    body: `Ares redujo el valor de los préstamos a tres compañías de software participadas por Clearlake Capital, advirtiendo de <strong>"conversaciones difíciles"</strong> por venir con empresas expuestas a disrupción por IA. Primer reconocimiento público de una gestora de este tamaño sobre quiebras de valor vinculadas a riesgo IA en cartera de crédito privado.`,
+    sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-04-28/ares-slashes-value-of-three-clearlake-owned-software-companies" }]
+  },
+  {
+    id: 9,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "yellow",
+    title: "~$1.000M en software de ARCC con riesgo IA «medio»: revisión externa activa",
+    date: "28 de abril de 2026", isoDate: "2026-04-28",
+    body: `Una auditoría externa sobre Ares Capital Corp. ($29.500M de cartera) identificó que el <strong>14% de las inversiones en software tienen riesgo IA «medio»</strong> y el 1% riesgo «alto» — unos $1.000M en conjunto (~3,3% del portafolio). El 85% restante está en riesgo «bajo». Se anticipan posibles amortizaciones adicionales.`,
+    sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-04-28/ares-sees-1-billion-of-bdc-s-software-bets-at-medium-ai-risk" }]
+  },
+  {
+    id: 10,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "yellow",
+    title: "Q1 2026: BPA por debajo de estimaciones y compresión de márgenes",
+    date: "1 de mayo de 2026", isoDate: "2026-05-01",
+    body: `Ares publicó resultados de Q1 2026: BPA de <strong>$1,24 frente a estimaciones de $1,36</strong> (miss de $0,12). Ingresos de $1.290M superaron estimaciones de $1.210M. La compresión de márgenes es el principal punto de atención para analistas, aunque la captación récord de $30.000M (+45% interanual) mitiga las preocupaciones.`,
+    sources: [
+      { label: "Yahoo Finance", url: "https://finance.yahoo.com/markets/stocks/articles/ares-expanding-aum-balance-aid-151100059.html" },
+      { label: "Simply Wall St", url: "https://simplywall.st/stocks/us/diversified-financials/nyse-ares/ares-management/news/ares-management-ares-q1-2026-margin-compression-challenges-b" }
+    ]
+  },
+  {
+    id: 11,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Captación récord Q1 2026: $30.000M (+45% interanual)",
+    date: "1 de mayo de 2026", isoDate: "2026-05-01",
+    body: `Ares logró su mayor fundraising trimestral de la historia en Q1 2026, con <strong>$30.000M captados</strong> — un aumento del 45% respecto al mismo período de 2025. Los AUM totales de la firma continúan en expansión.`,
+    sources: [{ label: "QuiverQuant", url: "https://www.quiverquant.com/news/ARES+MANAGEMENT+($ARES)+Releases+Q1+2026+Earnings" }]
+  },
+  {
+    id: 12,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Nuevo COO: Peter Ogilvie nombrado Director de Operaciones y Estrategia",
+    date: "29 de abril de 2026", isoDate: "2026-04-29",
+    body: `Ares nombró a Peter Ogilvie como Chief Operating Officer y Head of Strategy para apoyar la ejecución de las iniciativas de crecimiento estratégico de la firma.`,
+    sources: [{ label: "Ares Management", url: "https://www.aresmgmt.com/news-views" }]
+  },
+  {
+    id: 13,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Asociación de $910M en vivienda universitaria con Scion Group",
+    date: "20 de mayo de 2026", isoDate: "2026-05-20",
+    body: `Ares y Scion Group acordaron un partnership de <strong>$910M</strong> para activos de vivienda universitaria próximos a campus de élite, diversificando la estrategia de real estate hacia segmentos de demanda estable.`,
+    sources: [{ label: "Simply Wall St", url: "https://simplywall.st/stocks/us/diversified-financials/nyse-ares/ares-management/news/ares-management-turns-to-student-housing-for-new-income-stre/amp" }]
+  },
+  {
+    id: 14,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Renovación y ampliación de líneas de crédito rotativo de ARCC y ASIF",
+    date: "26 de mayo de 2026", isoDate: "2026-05-26",
+    body: `Ares Capital Corporation amplió su línea de crédito en ~<strong>$170M hasta $5.500M</strong> y redujo el coste de financiación en 0,10% anual. Ares Strategic Income Fund también renovó su facilidad, mejorando términos y plazo.`,
+    sources: [{ label: "Yahoo Finance", url: "https://finance.yahoo.com/markets/stocks/articles/ares-capital-corporation-ares-strategic-104500188.html" }]
+  },
+
+  /* ══ OAKTREE ═════════════════════════════════════════ */
+  {
+    id: 15,
+    manager: "oaktree", managerLabel: "Oaktree Capital Management",
+    severity: "yellow",
+    title: "Co-CEO Panossian advierte: mercados subestiman riesgos y Oaktree acumula liquidez defensiva",
+    date: "4 de mayo de 2026", isoDate: "2026-05-04",
+    body: `Armen Panossian, co-CEO de Oaktree, declaró que los precios de mercado le resultan un <strong>«head-scratcher»</strong> dado el nivel de riesgos subestimados. La firma está preservando liquidez a la espera de una corrección. Señal de posicionamiento defensivo de uno de los gestores de crédito más respetados del mundo.`,
+    sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-05-04/oaktree-co-ceo-calls-market-pricing-head-scratcher-given-risks" }]
+  },
+  {
+    id: 16,
+    manager: "oaktree", managerLabel: "Oaktree Capital Management",
+    severity: "yellow",
+    title: "Oaktree BDC amortiza préstamos de software y cuantifica 26% de exposición a IA",
+    date: "5 de mayo de 2026", isoDate: "2026-05-05",
+    body: `Oaktree Specialty Lending Corp. ($2.800M) recortó en <strong>~3%</strong> el valor de sus préstamos de software en cartera. La BDC también notificó que el <strong>26% de su cartera</strong> tiene exposición a sectores con riesgo de disrupción por IA — uno de los porcentajes más altos del sector.`,
+    sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-05-05/oaktree-bdc-marks-down-software-loans-flags-26-ai-exposure" }]
+  },
+  {
+    id: 17,
+    manager: "oaktree", managerLabel: "Oaktree Capital Management",
+    severity: "yellow",
+    title: "Alerta sobre «muro de vencimientos» high yield: ~$900.000M por refinanciar en 3 años",
+    date: "7 de mayo de 2026", isoDate: "2026-05-07",
+    body: `Oaktree alerta sobre el vencimiento de <strong>~$900.000M en deuda high yield</strong> estadounidense en los próximos tres años, emitida con alto apalancamiento en entorno de tipos cero. Con los tipos actuales, la refinanciación es muy difícil, generando oportunidades en situaciones especiales pero también riesgos para posicionados en deuda legacy.`,
+    sources: [{ label: "Bloomingbit / Oaktree", url: "https://en.bloomingbit.io/feed/news/112977" }]
+  },
+  {
+    id: 18,
+    manager: "oaktree", managerLabel: "Oaktree Capital Management",
+    severity: "green",
+    title: "Oaktree Strategic Credit Fund: distribución ordinaria de $0,16/acción (clase I)",
+    date: "26 de mayo de 2026", isoDate: "2026-05-26",
+    body: `El Consejo de Administración de Oaktree Strategic Credit Fund declaró la distribución periódica ordinaria para acciones clase I (<strong>$0,1600/acción</strong>), en línea con el calendario habitual del fondo.`,
+    sources: [{ label: "SEC Filing 8-K", url: "https://www.sec.gov/Archives/edgar/data/0001872371/000119312526231657/d228029d8k.htm" }]
+  },
+  {
+    id: 19,
+    manager: "oaktree", managerLabel: "Oaktree Capital Management",
+    severity: "green",
+    title: "Oaktree identifica oportunidades en situaciones especiales por entorno de tipos altos",
+    date: "7 de mayo de 2026", isoDate: "2026-05-07",
+    body: `Coherente con su mandato de crédito distressed, Oaktree señala que el entorno de tipos elevados abre nuevas oportunidades en deuda de situaciones especiales. La firma destaca que el mercado de crédito privado actual difiere de ciclos previos al operar con menor apalancamiento.`,
+    sources: [{ label: "Bloomingbit", url: "https://en.bloomingbit.io/feed/news/112977" }]
+  },
+
+  /* ══ LEXINGTON ═══════════════════════════════════════ */
+  {
+    id: 20,
+    manager: "lexington", managerLabel: "Lexington Partners",
+    severity: "green",
+    title: "Franklin Lexington supera $3.500M de AUM en el primer año: hito récord en secundarios",
+    date: "12 de febrero de 2026", isoDate: "2026-02-12",
+    body: `La estrategia Franklin Lexington de secundarios de private equity superó los <strong>$3.500M en AUM</strong> en menos de un año desde su lanzamiento. Sub-asesorada por Lexington Partners, confirma el fuerte apetito del mercado wealth por los secundarios.`,
+    sources: [
+      { label: "Yahoo Finance", url: "https://finance.yahoo.com/news/franklin-lexington-private-equities-secondaries-143000875.html" },
+      { label: "BusinessWire", url: "https://www.businesswire.com/news/home/20260212179946/en/Franklin-Lexington-Private-Equities-Secondaries-Strategy-Exceeds-%243.5-Billion-in-Assets-Under-Management-Globally-Within-First-Year" }
+    ]
+  },
+  {
+    id: 21,
+    manager: "lexington", managerLabel: "Lexington Partners",
+    severity: "green",
+    title: "Tres nuevas promociones a socio: Grape, Oak y Skelly en el equipo de secundarios",
+    date: "14 de enero de 2026", isoDate: "2026-01-14",
+    body: `Lexington ascendió a Peter Grape, Simon Oak y Michael Skelly al rango de socio (Partner), todos especializados en transacciones LP y GP-led. El grupo de socios de Lexington asciende a <strong>28 miembros</strong>.`,
+    sources: [
+      { label: "Lexington Partners", url: "https://www.lexingtonpartners.com/press-releases/lexington-partners-names-three-new-partners/" },
+      { label: "Yahoo Finance", url: "https://finance.yahoo.com/news/lexington-partners-names-three-partners-130000789.html" }
+    ]
+  },
+  {
+    id: 22,
+    manager: "lexington", managerLabel: "Lexington Partners",
+    severity: "green",
+    title: "Lanzamiento del fondo luxemburgués FLEX-I con >$875M en AUM al lanzamiento",
+    date: "22 de enero de 2026", isoDate: "2026-01-22",
+    body: `Franklin Templeton y Lexington Partners lanzaron FLEX-I, subfondo del SICAV domiciliado en Luxemburgo, con más de <strong>$875M al lanzamiento</strong>. Abre el acceso al mercado europeo de inversores de patrimonio a los secundarios de private equity.`,
+    sources: [{ label: "Lexington Partners", url: "https://www.lexingtonpartners.com/press-releases/franklin-templeton-and-lexington-partners-launch-first-registered-tender-offer-private-equity-secondaries-fund-for-u-s-wealth-channel/" }]
+  },
+  {
+    id: 23,
+    manager: "lexington", managerLabel: "Lexington Partners",
+    severity: "green",
+    title: "Posición líder consolidada: $82.000M de capitalización total como especialista global en secundarios",
+    date: "27 de mayo de 2026", isoDate: "2026-05-27",
+    body: `Lexington Partners mantiene su posición como uno de los mayores gestores de secundarios y co-inversión del mundo, con más de <strong>$82.000M de capitalización total</strong>. La integración con Franklin Templeton (2023) sigue generando sinergias positivas en distribución global.`,
+    sources: [{ label: "Lexington Partners", url: "https://www.lexingtonpartners.com/" }]
+  }
+];
+/* ═══════════════════════════════════════════════════════
+   DATA END
+═══════════════════════════════════════════════════════ */
+
+
+/* ════════════════════════════════════════════════
+   ESTADO
+════════════════════════════════════════════════ */
+let activeSev    = "negative";
+let activeMan    = "all";
+let activePeriod = "all";
+let searchQ      = "";
+
+/* ════════════════════════════════════════════════
+   UTILIDADES DE FECHA
+════════════════════════════════════════════════ */
+function weekBounds(weeksAgo) {
+  const d = new Date(CURRENT_DATE);
+  const dow = d.getDay() || 7;           // lun=1 … dom=7
+  d.setDate(d.getDate() - dow + 1 - weeksAgo * 7); // lunes
+  const start = new Date(d);
+  d.setDate(d.getDate() + 6);            // domingo
+  const end   = new Date(d);
+  end.setHours(23, 59, 59, 999);
+  return { start, end };
+}
+
+function fmtDate(d) {
+  return d.toLocaleDateString("es-ES", { day:"numeric", month:"long", year:"numeric" });
+}
+
+function inPeriod(iso) {
+  if (activePeriod === "all") return true;
+  const d = new Date(iso);
+  if (activePeriod === "current") {
+    const { start, end } = weekBounds(0);
+    return d >= start && d <= end;
+  }
+  if (activePeriod === "previous") {
+    const { start, end } = weekBounds(1);
+    return d >= start && d <= end;
+  }
+  if (activePeriod === "month") {
+    const ago = new Date(CURRENT_DATE);
+    ago.setDate(ago.getDate() - 30);
+    return d >= ago;
+  }
+  return true;
+}
+
+/* ════════════════════════════════════════════════
+   RENDER
+════════════════════════════════════════════════ */
+const SEV_LABEL = { red:"⚠ Grave", yellow:"! Atención", green:"✓ Normal" };
+
+// Calcula si la noticia es de "esta semana" para mostrar badge "Nuevo"
+function isThisWeek(iso) {
+  const { start, end } = weekBounds(0);
+  const d = new Date(iso);
+  return d >= start && d <= end;
+}
+
+function buildCards() {
+  const container = document.getElementById("cards");
+  container.innerHTML = "";
+  // Ordenar: más reciente primero
+  const sorted = [...NEWS].sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+
+  sorted.forEach(n => {
+    const card = document.createElement("div");
+    card.className = "news-card";
+    card.dataset.sev     = n.severity;
+    card.dataset.manager = n.manager;
+    card.dataset.iso     = n.isoDate;
+    card.dataset.txt     = (n.title + " " + n.body + " " + n.managerLabel).toLowerCase();
+
+    const srcs = n.sources.map(s =>
+      `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`
+    ).join(" · ");
+
+    const newBadge = isThisWeek(n.isoDate) ? `<span class="bnew">✦ Esta semana</span>` : "";
+
+    card.innerHTML = `
+      <div class="cbar ${n.severity}"></div>
+      <div class="ci">
+        <div class="ct">
+          <span class="bsev ${n.severity}">${SEV_LABEL[n.severity]}</span>
+          <span class="bmgr">${n.managerLabel}</span>
+          ${newBadge}
+          <div class="card-title">${n.title}</div>
+        </div>
+        <div class="card-meta">📅 ${n.date}</div>
+        <div class="card-body">${n.body}</div>
+        <div class="card-src">Fuentes: ${srcs}</div>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+/* ════════════════════════════════════════════════
+   FILTROS
+════════════════════════════════════════════════ */
+function matchSev(cardSev) {
+  if (activeSev === "all")      return true;
+  if (activeSev === "negative") return cardSev === "red" || cardSev === "yellow";
+  return cardSev === activeSev;
+}
+
+function applyFilters() {
+  const cards   = document.querySelectorAll(".news-card");
+  let   visible = 0;
+
+  cards.forEach(card => {
+    const ok = matchSev(card.dataset.sev)
+            && (activeMan === "all" || card.dataset.manager === activeMan)
+            && (!searchQ || card.dataset.txt.includes(searchQ))
+            && inPeriod(card.dataset.iso);
+
+    card.classList.toggle("hidden", !ok);
+    if (ok) visible++;
+  });
+
+  const total = NEWS.length;
+  document.getElementById("rc").textContent = visible === total ? "" : `${visible} de ${total} noticias`;
+  document.getElementById("empty").style.display = visible === 0 ? "block" : "none";
+}
+
+function updateBanner() {
+  const banner = document.getElementById("pbanner");
+  const label  = document.getElementById("prange");
+  if (activePeriod === "all") {
+    banner.classList.add("hidden");
+    return;
+  }
+  banner.classList.remove("hidden");
+  if (activePeriod === "current") {
+    const { start, end } = weekBounds(0);
+    label.textContent = `Semana actual: ${fmtDate(start)} – ${fmtDate(end)}`;
+  } else if (activePeriod === "previous") {
+    const { start, end } = weekBounds(1);
+    label.textContent = `Semana anterior: ${fmtDate(start)} – ${fmtDate(end)}`;
+  } else if (activePeriod === "month") {
+    const ago = new Date(CURRENT_DATE);
+    ago.setDate(ago.getDate() - 30);
+    label.textContent = `Últimos 30 días: ${fmtDate(ago)} – ${fmtDate(CURRENT_DATE)}`;
+  }
+}
+
+function updateStats() {
+  const c = { red:0, yellow:0, green:0 };
+  NEWS.forEach(n => c[n.severity]++);
+  document.getElementById("cnt-total").textContent  = NEWS.length;
+  document.getElementById("cnt-red").textContent    = c.red;
+  document.getElementById("cnt-yellow").textContent = c.yellow;
+  document.getElementById("cnt-green").textContent  = c.green;
+}
+
+/* ════════════════════════════════════════════════
+   EVENTOS — chips
+════════════════════════════════════════════════ */
+document.querySelectorAll(".chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    const f = chip.dataset.f;
+    const v = chip.dataset.v;
+    document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(c => c.classList.remove("on"));
+    chip.classList.add("on");
+    if (f === "severity") activeSev    = v;
+    else if (f === "period") { activePeriod = v; updateBanner(); }
+    else                     activeMan    = v;
+    applyFilters();
+  });
+});
+
+/* ════════════════════════════════════════════════
+   BÚSQUEDA
+════════════════════════════════════════════════ */
+document.getElementById("search").addEventListener("input", e => {
+  searchQ = e.target.value.toLowerCase().trim();
+  applyFilters();
+});
+
+/* ════════════════════════════════════════════════
+   TEMA OSCURO
+════════════════════════════════════════════════ */
+const themeBtn = document.getElementById("themeBtn");
+function setTheme(dark) {
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  themeBtn.textContent = dark ? "☀️" : "🌙";
+  localStorage.setItem("theme", dark ? "dark" : "light");
+}
+themeBtn.addEventListener("click", () => setTheme(document.documentElement.dataset.theme !== "dark"));
+const saved = localStorage.getItem("theme");
+if (saved) setTheme(saved === "dark");
+
+/* ════════════════════════════════════════════════
+   INICIO
+════════════════════════════════════════════════ */
+buildCards();
+updateStats();
+applyFilters();
+</script>
+</body>
+</html>

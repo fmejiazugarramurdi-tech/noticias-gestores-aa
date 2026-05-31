@@ -1,0 +1,41 @@
+name: 📰 Buscar Noticias
+
+# ── Disparador: solo manual (tú haces clic en GitHub.com) ──
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Días hacia atrás a buscar (default: 7)"
+        required: false
+        default: "7"
+
+jobs:
+  fetch:
+    name: Buscar y guardar noticias
+    runs-on: ubuntu-latest
+
+    # Permiso para hacer commit al repositorio
+    permissions:
+      contents: write
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Ejecutar script de búsqueda
+        run: python scripts/fetch_news.py ${{ github.event.inputs.days }}
+
+      - name: Guardar resultados en el repositorio
+        run: |
+          git config user.name  "News Fetcher Bot"
+          git config user.email "bot@github-actions.com"
+          git add pending-news.json
+          # Solo hace commit si hay cambios
+          git diff --staged --quiet && echo "Sin noticias nuevas." || \
+            git commit -m "fetch: noticias pendientes $(date +%Y-%m-%d)"
+          git push

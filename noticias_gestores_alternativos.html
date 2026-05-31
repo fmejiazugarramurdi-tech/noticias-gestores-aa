@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noticias Gestores de Activos Alternativos — Mayo 2026</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f9;
+      color: #222;
+      padding: 30px 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+      color: #1a2a4a;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    /* Leyenda */
+    .legend {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-red    { background: #e53935; }
+    .dot-yellow { background: #f9a825; }
+    .dot-green  { background: #43a047; }
+
+    /* Secciones de gestores */
+    .manager-section {
+      max-width: 960px;
+      margin: 0 auto 36px auto;
+    }
+    .manager-header {
+      background: #1a2a4a;
+      color: #fff;
+      border-radius: 8px 8px 0 0;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .manager-body {
+      background: #fff;
+      border: 1px solid #dde1ea;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    /* Tarjetas de noticias */
+    .news-card {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid #eaedf3;
+    }
+    .news-card:last-child { border-bottom: none; }
+
+    .color-bar {
+      width: 7px;
+      flex-shrink: 0;
+    }
+    .bar-red    { background: #e53935; }
+    .bar-yellow { background: #f9a825; }
+    .bar-green  { background: #43a047; }
+
+    .news-content {
+      padding: 14px 18px;
+      flex: 1;
+    }
+    .news-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+    .badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .badge-red    { background: #fdecea; color: #c62828; border: 1px solid #e53935; }
+    .badge-yellow { background: #fffde7; color: #f57f17; border: 1px solid #f9a825; }
+    .badge-green  { background: #e8f5e9; color: #2e7d32; border: 1px solid #43a047; }
+
+    .news-title {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: #1a2a4a;
+      line-height: 1.35;
+    }
+    .news-date {
+      font-size: 0.78rem;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .news-body {
+      font-size: 0.88rem;
+      color: #444;
+      line-height: 1.55;
+    }
+    .news-source {
+      margin-top: 7px;
+      font-size: 0.78rem;
+    }
+    .news-source a {
+      color: #1565c0;
+      text-decoration: none;
+    }
+    .news-source a:hover { text-decoration: underline; }
+
+    /* Resumen ejecutivo */
+    .summary-box {
+      max-width: 960px;
+      margin: 0 auto 30px auto;
+      background: #1a2a4a;
+      color: #e8edf5;
+      border-radius: 8px;
+      padding: 18px 24px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .summary-box h2 {
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .summary-box ul { padding-left: 18px; }
+    .summary-box li { margin-bottom: 4px; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #aaa;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Noticias — Gestores de Activos Alternativos Internacionales</h1>
+<p class="subtitle">Seguimiento del último mes · Actualizado a 27 de mayo de 2026</p>
+
+<!-- Leyenda -->
+<div class="legend">
+  <div class="legend-item"><span class="dot dot-red"></span> ROJO — Grave / Requiere atención inmediata</div>
+  <div class="legend-item"><span class="dot dot-yellow"></span> AMARILLO — A tener en cuenta / Riesgo latente</div>
+  <div class="legend-item"><span class="dot dot-green"></span> VERDE — Normal / Actividad ordinaria</div>
+</div>
+
+<!-- Resumen ejecutivo -->
+<div class="summary-box">
+  <h2>Resumen ejecutivo</h2>
+  <ul>
+    <li><strong>Brookfield</strong> es el gestor con mayor riesgo reputacional y legal del período, por la demanda de fraude del ex-socio Josh Raffaelli con implicaciones ante la SEC.</li>
+    <li><strong>Ares Management</strong> presenta riesgo operativo por exposición a software ante la disrupción de la IA y posibles reclamaciones de inversores en su fondo ASIF.</li>
+    <li><strong>Oaktree</strong> lanza advertencias macroeconómicas importantes sobre crédito y deuda high-yield; su posicionamiento defensivo es una señal relevante de mercado.</li>
+    <li><strong>Lexington Partners</strong> muestra el perfil de noticias más limpio del período, con crecimiento sólido en su estrategia de secundarios.</li>
+  </ul>
+</div>
+
+
+<!-- ==============================
+     BROOKFIELD ASSET MANAGEMENT
+=============================== -->
+<div class="manager-section">
+  <div class="manager-header">
+    🏢 Brookfield Asset Management
+  </div>
+  <div class="manager-body">
+
+    <!-- ROJA -->
+    <div class="news-card">
+      <div class="color-bar bar-red"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-red">⚠ Grave</span>
+          <div class="news-title">Demanda por fraude de ex-socio gestor: acusaciones de malversación de capital y represalia ante el denunciante</div>
+        </div>
+        <div class="news-date">Mayo 2026 · San Mateo County Superior Court (California)</div>
+        <div class="news-body">
+          Josh Raffaelli, ex-managing partner de Brookfield, presentó una demanda de 100 páginas acusando a la firma de <strong>desviar capital</strong> de los fondos que gestionaba para compensar pérdidas de su división de real estate comercial, de <strong>inflar artificialmente</strong> el balance de Pinegrove Capital Partners en más de 100 millones de dólares, y de <strong>limitar el acceso de clientes a inversiones de alto perfil</strong> (incluida xAI de Elon Musk). Raffaelli presentó una denuncia interna y posteriormente ante la <strong>SEC a finales de 2024</strong>, y fue despedido en diciembre. Brookfield niega categóricamente todas las acusaciones.
+        </div>
+        <div class="news-source">
+          Fuentes:
+          <a href="https://www.courthousenews.com/silicon-valley-investor-with-ties-to-elon-musk-accuses-brookfield-of-fraud-retaliation/" target="_blank">Courthouse News</a> ·
+          <a href="https://pitchbook.com/news/articles/brookfield-venture-lawsuit-josh-raffaelli" target="_blank">PitchBook</a> ·
+          <a href="https://thegistnotes.com/lawsuit-exposes-allegations-of-fraud-and-bribery-at-brookfield-asset-management/" target="_blank">The Gist Notes</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMARILLA -->
+    <div class="news-card">
+      <div class="color-bar bar-yellow"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-yellow">! Atención</span>
+          <div class="news-title">Adquisición de Peakstone Realty Trust: exposición creciente al real estate comercial</div>
+        </div>
+        <div class="news-date">6 de mayo de 2026</div>
+        <div class="news-body">
+          Brookfield completó la adquisición de Peakstone Realty Trust, ampliando su exposición a real estate comercial en un momento en que su propia demanda judicial señala pérdidas previas en esa misma área. A tener en cuenta en el contexto de la demanda Raffaelli.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://bam.brookfield.com/events-news/press-releases" target="_blank">Brookfield Press Releases</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMARILLA -->
+    <div class="news-card">
+      <div class="color-bar bar-yellow"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-yellow">! Atención</span>
+          <div class="news-title">Emisión de deuda de $1.000 millones: nuevas notas a 2031 y reapertura de notas a 2036</div>
+        </div>
+        <div class="news-date">14 de abril de 2026</div>
+        <div class="news-body">
+          Brookfield anunció la emisión de $550M en notas con vencimiento 2031 y la reapertura de $450M en notas con vencimiento 2036. La elevada deuda a nivel corporativo, en el contexto de la demanda activa sobre gestión de fondos, es un factor a seguir de cerca.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://bam.brookfield.com/events-news/press-releases" target="_blank">Brookfield Press Releases</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Resultados Q1 2026: trimestre sólido, 2026 en camino de ser el año de mayor captación histórica</div>
+        </div>
+        <div class="news-date">8 de mayo de 2026</div>
+        <div class="news-body">
+          Brookfield reportó resultados fuertes en Q1 2026, con expectativas de que 2026 sea el mayor año de captación de capital de la historia de la firma. Los fondos co-gestionados (Primary Wave, 17Capital, Pinegrove) cerraron por encima de sus objetivos.
+        </div>
+        <div class="news-source">
+          Fuentes:
+          <a href="https://www.bloomberg.com/news/newsletters/2026-05-08/brookfield-asset-management-s-safe-assets-have-strong-quarter" target="_blank">Bloomberg</a> ·
+          <a href="https://seekingalpha.com/article/4902789-brookfield-asset-management-2026-set-to-be-record-year-for-fee-bearing-capital-formation" target="_blank">Seeking Alpha</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Junta General Anual: reelección de los 12 consejeros por unanimidad</div>
+        </div>
+        <div class="news-date">8 de mayo de 2026 · Nueva York</div>
+        <div class="news-body">
+          En la junta anual de accionistas celebrada el 7 de mayo en Nueva York, los 12 candidatos propuestos para el Consejo de Administración fueron elegidos sin incidencias.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.globenewswire.com/news-release/2026/05/08/3291375/0/en/Brookfield-Asset-Management-Announces-Results-of-Annual-Meeting-of-Shareholders.html" target="_blank">GlobeNewswire</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Demanda por plan 401(k) desestimada: Brookfield exonerada</div>
+        </div>
+        <div class="news-date">Marzo 2026</div>
+        <div class="news-body">
+          Un tribunal desestimó la demanda colectiva que cuestionaba los fondos de jubilación (target-date funds) de American Century usados como inversión por defecto en el plan 401(k) de empleados de Brookfield. Los fondos obtuvieron rendimientos positivos y el tribunal consideró insuficiente el argumento de incumplimiento fiduciario.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://news.bloomberglaw.com/employee-benefits/brookfield-asset-management-cleared-in-401k-plan-fund-lawsuit" target="_blank">Bloomberg Law</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==============================
+     ARES MANAGEMENT
+=============================== -->
+<div class="manager-section">
+  <div class="manager-header">
+    🏢 Ares Management
+  </div>
+  <div class="manager-body">
+
+    <!-- ROJA -->
+    <div class="news-card">
+      <div class="color-bar bar-red"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-red">⚠ Grave</span>
+          <div class="news-title">Ares Strategic Income Fund (ASIF): investigación por potenciales pérdidas de inversores y FINRA</div>
+        </div>
+        <div class="news-date">Mayo 2026</div>
+        <div class="news-body">
+          El fondo ASIF (BDC no listado de Ares) está bajo escrutinio por preocupaciones sobre cómo fue comercializado entre inversores minoristas. Bufetes especializados en valores (The White Law Group) están investigando pérdidas de inversores y hay procesos de arbitraje FINRA abiertos. La SEC tiene foco activo en 2026 sobre la transparencia de productos de crédito privado para el canal minorista y la divulgación de comisiones. Ares también <strong>elevó las comisiones máximas del prospecto</strong> (clase D de 1,5% a 2%; nuevo límite del 2% para clase I), generando críticas adicionales.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://whitesecuritieslaw.com/ares-strategic-income-fund-securities-investigation/" target="_blank">The White Law Group</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROJA -->
+    <div class="news-card">
+      <div class="color-bar bar-red"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-red">⚠ Grave</span>
+          <div class="news-title">Ares recorta valoraciones de préstamos a tres empresas de software de Clearlake Capital</div>
+        </div>
+        <div class="news-date">28 de abril de 2026</div>
+        <div class="news-body">
+          Ares redujo el valor de los préstamos concedidos a tres compañías de software participadas por Clearlake Capital, al mismo tiempo que advierte de "conversaciones difíciles" por venir con empresas de software expuestas a disrupción por inteligencia artificial. Es la primera vez que una gestora de este tamaño reconoce públicamente quiebras de valor vinculadas al riesgo IA en cartera de crédito privado.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.bloomberg.com/news/articles/2026-04-28/ares-slashes-value-of-three-clearlake-owned-software-companies" target="_blank">Bloomberg</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMARILLA -->
+    <div class="news-card">
+      <div class="color-bar bar-yellow"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-yellow">! Atención</span>
+          <div class="news-title">~$1.000 millones de apuestas en software de ARCC clasificadas en riesgo "medio" por IA</div>
+        </div>
+        <div class="news-date">28 de abril de 2026</div>
+        <div class="news-body">
+          Una revisión externa encargada por Ares sobre su mayor BDC listado (Ares Capital Corp., cartera de $29.500M) identificó que el 14% de las inversiones en software presentan riesgo "medio" de disrupción por IA y el 1% riesgo "alto" — unos $1.000M en conjunto (~3,3% del portafolio total). El 85% restante está en riesgo "bajo". La revisión adelanta posibles amortizaciones adicionales.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.bloomberg.com/news/articles/2026-04-28/ares-sees-1-billion-of-bdc-s-software-bets-at-medium-ai-risk" target="_blank">Bloomberg</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMARILLA -->
+    <div class="news-card">
+      <div class="color-bar bar-yellow"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-yellow">! Atención</span>
+          <div class="news-title">Q1 2026: BPA por debajo de expectativas y compresión de márgenes</div>
+        </div>
+        <div class="news-date">1 de mayo de 2026</div>
+        <div class="news-body">
+          Ares publicó resultados de Q1 2026: BPA de $1,24 frente a estimaciones de $1,36 (miss de $0,12). Los ingresos de $1.290M superaron estimaciones de $1.210M. La compresión de márgenes es el principal punto de atención para analistas, aunque la captación récord de $30.000M (+45% interanual) mitiga parte de las preocupaciones.
+        </div>
+        <div class="news-source">
+          Fuentes: <a href="https://finance.yahoo.com/markets/stocks/articles/ares-expanding-aum-balance-aid-151100059.html" target="_blank">Yahoo Finance</a> ·
+          <a href="https://simplywall.st/stocks/us/diversified-financials/nyse-ares/ares-management/news/ares-management-ares-q1-2026-margin-compression-challenges-b" target="_blank">Simply Wall St</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Captación récord en Q1 2026: $30.000 millones (+45% interanual)</div>
+        </div>
+        <div class="news-date">Mayo 2026</div>
+        <div class="news-body">
+          Ares logró su mayor fundraising trimestral histórico en Q1 2026, con $30.000M captados — un aumento del 45% respecto al mismo período del año anterior. Los AUM totales de la firma continúan expandiéndose.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.quiverquant.com/news/ARES+MANAGEMENT+($ARES)+Releases+Q1+2026+Earnings" target="_blank">QuiverQuant</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Nuevo COO: Peter Ogilvie nombrado Director de Operaciones y Estrategia</div>
+        </div>
+        <div class="news-date">29 de abril de 2026</div>
+        <div class="news-body">
+          Ares nombró a Peter Ogilvie como Chief Operating Officer y Head of Strategy para apoyar la ejecución de las iniciativas de crecimiento estratégico de la firma.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.aresmgmt.com/news-views" target="_blank">Ares Management</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Asociación de $910M en residencias universitarias con Scion Group</div>
+        </div>
+        <div class="news-date">Mayo 2026</div>
+        <div class="news-body">
+          Ares y Scion Group acordaron un partnership de $910M para activos de vivienda universitaria próximos a campus de élite, diversificando la estrategia de real estate hacia segmentos de demanda estable.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://simplywall.st/stocks/us/diversified-financials/nyse-ares/ares-management/news/ares-management-turns-to-student-housing-for-new-income-stre/amp" target="_blank">Simply Wall St</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Renovación y ampliación de líneas de crédito rotativo de ARCC y ASIF</div>
+        </div>
+        <div class="news-date">26 de mayo de 2026</div>
+        <div class="news-body">
+          Ares Capital Corporation amplió su línea de crédito rotativo en ~$170M hasta $5.500M, reduciendo el coste de financiación en 0,10% anual. Ares Strategic Income Fund también renovó su facilidad de crédito, mejorando términos y plazo.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://finance.yahoo.com/markets/stocks/articles/ares-capital-corporation-ares-strategic-104500188.html" target="_blank">Yahoo Finance</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==============================
+     OAKTREE CAPITAL MANAGEMENT
+=============================== -->
+<div class="manager-section">
+  <div class="manager-header">
+    🏢 Oaktree Capital Management
+  </div>
+  <div class="manager-body">
+
+    <!-- AMARILLA -->
+    <div class="news-card">
+      <div class="color-bar bar-yellow"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-yellow">! Atención</span>
+          <div class="news-title">Co-CEO Panossian advierte: los mercados subestiman los riesgos y Oaktree acumula liquidez</div>
+        </div>
+        <div class="news-date">4 de mayo de 2026</div>
+        <div class="news-body">
+          Armen Panossian, co-CEO de Oaktree, declaró públicamente que los precios de mercado le resultan un "<em>head-scratcher</em>" dado el nivel de riesgos fundamentales subestimado por los inversores. La firma está preservando liquidez a la espera de una corrección. Esta señal de posicionamiento defensivo de uno de los gestores de crédito más respetados del mundo debe tomarse en serio.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.bloomberg.com/news/articles/2026-05-04/oaktree-co-ceo-calls-market-pricing-head-scratcher-given-risks" target="_blank">Bloomberg</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMARILLA -->
+    <div class="news-card">
+      <div class="color-bar bar-yellow"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-yellow">! Atención</span>
+          <div class="news-title">Oaktree BDC amortiza préstamos de software y alerta de un 26% de exposición a IA</div>
+        </div>
+        <div class="news-date">5 de mayo de 2026</div>
+        <div class="news-body">
+          Oaktree Specialty Lending Corp. ($2.800M) recortó en ~3% el valor de sus préstamos de software en cartera, alegando deterioro en préstamos comparables cotizados. La BDC también notificó un 26% de exposición a sectores con riesgo de disrupción por IA, convirtiendo a Oaktree en uno de los primeros gestores en cuantificar públicamente esta concentración sectorial.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.bloomberg.com/news/articles/2026-05-05/oaktree-bdc-marks-down-software-loans-flags-26-ai-exposure" target="_blank">Bloomberg</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMARILLA -->
+    <div class="news-card">
+      <div class="color-bar bar-yellow"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-yellow">! Atención</span>
+          <div class="news-title">Alerta sobre el "muro de vencimientos" en high yield: ~$900.000M por refinanciar en 3 años</div>
+        </div>
+        <div class="news-date">Abril–Mayo 2026</div>
+        <div class="news-body">
+          Oaktree alerta sobre el vencimiento de ~$900.000M en deuda high yield estadounidense en los próximos tres años, mucha de ella emitida con alto apalancamiento en el entorno de tipos cero. Con los tipos actuales, la refinanciación es muy difícil, abriendo oportunidades en situaciones especiales — pero también exponiendo a inversores con posiciones en deuda legacy de esas empresas.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://en.bloomingbit.io/feed/news/112977" target="_blank">Bloomingbit / Oaktree</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Oaktree Strategic Credit Fund declara distribución ordinaria de $0,16/acción (clase I)</div>
+        </div>
+        <div class="news-date">26 de mayo de 2026</div>
+        <div class="news-body">
+          El Consejo de Administración de Oaktree Strategic Credit Fund declaró la distribución periódica ordinaria para las acciones clase I ($0,1600/acción), en línea con el calendario habitual del fondo.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.sec.gov/Archives/edgar/data/0001872371/000119312526231657/d228029d8k.htm" target="_blank">SEC Filing 8-K</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Oaktree identifica oportunidades en "situaciones especiales" ligadas al entorno de tipos altos</div>
+        </div>
+        <div class="news-date">Abril–Mayo 2026</div>
+        <div class="news-body">
+          Coherente con su mandato de crédito distressed, Oaktree señala que el entorno de tipos elevados está abriendo nuevas oportunidades en deuda de situaciones especiales — su área de mayor especialización. La firma destaca que el mercado de crédito privado actual difiere de ciclos previos al operar con menor apalancamiento.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://en.bloomingbit.io/feed/news/112977" target="_blank">Bloomingbit</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ==============================
+     LEXINGTON PARTNERS
+=============================== -->
+<div class="manager-section">
+  <div class="manager-header">
+    🏢 Lexington Partners
+  </div>
+  <div class="manager-body">
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Franklin Lexington supera $3.500M de AUM en su primer año: hito record para la estrategia de secundarios</div>
+        </div>
+        <div class="news-date">Febrero 2026</div>
+        <div class="news-body">
+          La estrategia Franklin Lexington de secundarios de private equity superó los $3.500M en activos bajo gestión en menos de un año desde su lanzamiento global. Disponible para inversores institucionales y de wealth management, sub-asesorada por Lexington Partners. Confirma el fuerte apetito del mercado por secundarios en el canal minorista/wealth.
+        </div>
+        <div class="news-source">
+          Fuentes: <a href="https://finance.yahoo.com/news/franklin-lexington-private-equities-secondaries-143000875.html" target="_blank">Yahoo Finance</a> ·
+          <a href="https://www.businesswire.com/news/home/20260212179946/en/Franklin-Lexington-Private-Equities-Secondaries-Strategy-Exceeds-%243.5-Billion-in-Assets-Under-Management-Globally-Within-First-Year" target="_blank">BusinessWire</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Tres nuevas promociones a socio: Grape, Oak y Skelly ascienden al equipo de secundarios</div>
+        </div>
+        <div class="news-date">Enero 2026 (efectivo 1 enero 2026)</div>
+        <div class="news-body">
+          Lexington Partners ascendió a Peter Grape, Simon Oak y Michael Skelly al rango de socio (Partner), todos ellos miembros del equipo de secundarios especializado en transacciones LP y GP-led. El grupo de socios de Lexington asciende a 28 miembros.
+        </div>
+        <div class="news-source">
+          Fuentes: <a href="https://www.lexingtonpartners.com/press-releases/lexington-partners-names-three-new-partners/" target="_blank">Lexington Partners</a> ·
+          <a href="https://finance.yahoo.com/news/lexington-partners-names-three-partners-130000789.html" target="_blank">Yahoo Finance</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Lanzamiento del fondo luxemburgués FLEX-I con >$875M de partida</div>
+        </div>
+        <div class="news-date">Inicio 2026</div>
+        <div class="news-body">
+          Franklin Templeton y Lexington Partners lanzaron el Franklin Lexington PE Secondaries Fund (FLEX-I), subfondo domiciliado en Luxemburgo del SICAV Franklin Lexington Private Markets Fund, con más de $875M en AUM al lanzamiento. El vehículo abre el acceso al mercado europeo de inversores de patrimonio.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.lexingtonpartners.com/press-releases/franklin-templeton-and-lexington-partners-launch-first-registered-tender-offer-private-equity-secondaries-fund-for-u-s-wealth-channel/" target="_blank">Lexington Partners</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDE -->
+    <div class="news-card">
+      <div class="color-bar bar-green"></div>
+      <div class="news-content">
+        <div class="news-header">
+          <span class="badge badge-green">✓ Normal</span>
+          <div class="news-title">Solidez corporativa: $82.000M de capitalización total bajo la marca Franklin Templeton</div>
+        </div>
+        <div class="news-date">Mayo 2026</div>
+        <div class="news-body">
+          Lexington Partners mantiene su posición como uno de los mayores gestores de fondos de secundarios y co-inversión del mundo, con más de $82.000M de capitalización total. La integración con Franklin Templeton (completada en 2023) continúa generando sinergias positivas en distribución global.
+        </div>
+        <div class="news-source">
+          Fuente: <a href="https://www.lexingtonpartners.com/" target="_blank">Lexington Partners</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Informe elaborado a partir de búsquedas web públicas · 27 de mayo de 2026<br/>
+  Fuentes: Bloomberg, Yahoo Finance, Courthouse News, PitchBook, SEC EDGAR, GlobeNewswire, BusinessWire, Simply Wall St, The White Law Group, Seeking Alpha
+</footer>
+
+</body>
+</html>

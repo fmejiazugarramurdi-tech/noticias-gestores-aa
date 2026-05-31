@@ -130,7 +130,7 @@
   <div class="header-inner">
     <div class="logo">📊 Monitor de Noticias <span>/ Gestores Alternativos Internacionales</span></div>
     <div class="header-right">
-      <div id="date-badge">Actualizado: 27 mayo 2026</div>
+      <div id="date-badge">Actualizado: 30 mayo 2026</div>
       <button class="theme-btn" id="themeBtn" title="Modo oscuro">🌙</button>
     </div>
   </div>
@@ -217,12 +217,51 @@
 /* ═══════════════════════════════════════════════════════
    CONFIGURACIÓN — el agente actualiza esta fecha
 ═══════════════════════════════════════════════════════ */
-const CURRENT_DATE = new Date("2026-05-27");
+const CURRENT_DATE = new Date("2026-05-30");
 
 /* ═══════════════════════════════════════════════════════
    DATA START — el agente añade nuevas noticias AQUÍ ARRIBA
 ═══════════════════════════════════════════════════════ */
 const NEWS = [
+
+  /* ══ SEMANA 26–30 MAYO 2026 ══════════════════════════ */
+  {
+    id: 26,
+    manager: "oaktree", managerLabel: "Oaktree Capital Management",
+    severity: "green",
+    title: "Oaktree y Pantheon lanzan alianza de préstamo directo europeo con objetivo de €1.000M",
+    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    body: `Oaktree Capital Management se asoció con Pantheon Ventures (gestora con <strong>$85.000M en AUM</strong>) para impulsar su estrategia de préstamo directo europeo hasta <strong>€1.000M (~$1.200M)</strong>. Pantheon aportará capital fresco sobre una cartera semilla existente de préstamos europeos. La estrategia se centrará en préstamos senior garantizados de primer rango a empresas de Europa y el Reino Unido. Oaktree señaló que este será el primero de varios fondos dedicados a direct lending europeo, mercado que considera infrapenetrado por fuentes de crédito alternativo.`,
+    sources: [
+      { label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-05-28/oaktree-partners-with-pantheon-to-boost-european-direct-lending" },
+      { label: "Alternative Credit Investor", url: "https://alternativecreditinvestor.com/2026/05/28/oaktree-secures-pantheon-backing-for-european-direct-lending-expansion/" },
+      { label: "Private Debt Investor", url: "https://www.privatedebtinvestor.com/oaktree-partners-with-pantheon-to-scale-european-lending/" }
+    ]
+  },
+  {
+    id: 25,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "green",
+    title: "Dividendo trimestral de $0,5025/acción con yield del 4,12% — fecha récord 29 de mayo",
+    date: "29 de mayo de 2026", isoDate: "2026-05-29",
+    body: `El Consejo de Administración de Brookfield Asset Management (NYSE: BAM) declaró un <strong>dividendo trimestral de $0,5025 por acción</strong>, pagadero el 30 de junio de 2026 a accionistas registrados a cierre del 29 de mayo de 2026. El dividendo ofrece un <em>yield</em> anualizado del <strong>4,12%</strong>, en línea con la política de distribución histórica de la firma.`,
+    sources: [
+      { label: "GuruFocus", url: "https://www.gurufocus.com/news/8846212/bam-declares-quarterly-dividend-of-05025-with-412-yield" },
+      { label: "SEC 8-K", url: "https://www.sec.gov/Archives/edgar/data/0001937926/000117184326003183/exh_991.htm" }
+    ]
+  },
+  {
+    id: 24,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Co-Presidente Jacobson presenta en Goldman Sachs European Financials Conference el 3 de junio",
+    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    body: `Ares Management anunció que su Co-Presidente <strong>Blair Jacobson</strong> presentará en el Goldman Sachs European Financials Conference el <strong>3 de junio de 2026</strong>. La presentación estará disponible en webcast en vivo y en diferido en la sección de Relaciones con Inversores de aresmgmt.com. La presencia en este foro refuerza el posicionamiento de Ares ante inversores institucionales europeos.`,
+    sources: [
+      { label: "Yahoo Finance", url: "https://finance.yahoo.com/markets/stocks/articles/ares-management-corporation-present-goldman-233000299.html" },
+      { label: "StockTitan", url: "https://www.stocktitan.net/news/ARES/ares-management-corporation-to-present-at-the-goldman-sachs-european-5q6p0dudm7x4.html" }
+    ]
+  },
 
   /* ══ BROOKFIELD ══════════════════════════════════════ */
   {

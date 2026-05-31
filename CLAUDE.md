@@ -154,7 +154,26 @@ Total: 26 noticias | 3 rojas | 6 amarillas | 17 verdes
 
 ---
 
-## 10. TOKENS Y EFICIENCIA
+## 10. GITHUB MCP — CONFIGURADO ✅
+
+El GitHub MCP (Model Context Protocol) está instalado y permite a Claude Code leer y escribir archivos en GitHub directamente, sin comandos git manuales.
+
+**Configuración guardada en:** `C:\Users\fmeji\.claude\settings.json` (global, no está en el repo)
+**Token guardado en:** Variable de entorno de Windows `GITHUB_PERSONAL_ACCESS_TOKEN`
+**Paquete:** `@modelcontextprotocol/server-github`
+**Node.js:** v24.16.0 (instalado vía winget)
+
+**Qué permite hacer:**
+- Leer `news-data.js` directamente desde GitHub (sin git pull)
+- Escribir cambios directamente a GitHub (sin git add/commit/push)
+- Ver el historial de commits del repo
+- Listar archivos del repositorio
+
+**IMPORTANTE:** Reiniciar Claude Code para activar el MCP en nuevas sesiones.
+
+---
+
+## 11. TOKENS Y EFICIENCIA
 
 - Actualización semanal: ~1.500 tokens (vs ~13.000 antes de la refactorización)
 - El ahorro viene de: GitHub Action busca noticias (0 tokens) y Claude solo clasifica
@@ -163,7 +182,7 @@ Total: 26 noticias | 3 rojas | 6 amarillas | 17 verdes
 
 ---
 
-## 11. CÓMO RETOMAR EN UNA NUEVA CONVERSACIÓN
+## 12. CÓMO RETOMAR EN UNA NUEVA CONVERSACIÓN
 
 Escribir exactamente esto al inicio:
 

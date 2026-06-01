@@ -4,10 +4,84 @@
 //  NO editar manualmente — usar /classify-news en Claude Code
 // ═══════════════════════════════════════════════════════
 
-const CURRENT_DATE = new Date("2026-05-30");
+const CURRENT_DATE = new Date("2026-05-31");
 
 // DATA START — Claude inserta noticias nuevas AQUÍ ARRIBA
 const NEWS = [
+
+  /* ══ SEMANA 31 MAYO – 1 JUNIO 2026 ══════════════════ */
+  {
+    id: 27,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Ares y Scion Group adquieren cartera de vivienda estudiantil por $910M",
+    date: "26 de mayo de 2026", isoDate: "2026-05-26",
+    body: `Ares Management se asoció con <strong>Scion Group</strong> para adquirir una cartera de vivienda estudiantil valorada en <strong>$910 millones</strong>. La operación refuerza la apuesta de Ares por el sector residencial alternativo, añadiendo activos en campus universitarios de alto perfil. Scion Group, uno de los mayores operadores de vivienda estudiantil de EE.UU., actuará como gestor de los activos. La transacción se financia mediante deuda senior y capital institucional.`,
+    sources: [{ label: "Multifamily Dive", url: "https://www.multifamilydive.com/" }]
+  },
+  {
+    id: 28,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "yellow",
+    title: "Analistas cuestionan si Ares está sobrevalorada tras el rebote reciente",
+    date: "30 de mayo de 2026", isoDate: "2026-05-30",
+    body: `Tras el fuerte rebote de la acción de <strong>Ares Management (NYSE: ARES)</strong>, analistas de Simply Wall St. advierten de que el mercado puede estar descontando ya un escenario excesivamente optimista. El informe señala que la cotización actual implica expectativas de crecimiento que podrían ser difíciles de cumplir en un entorno de tipos elevados y compresión de spreads en crédito privado. Se recomienda cautela antes de ampliar posiciones.`,
+    sources: [{ label: "Simply Wall St.", url: "https://simplywall.st/" }]
+  },
+  {
+    id: 29,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Ares renueva su línea de crédito corporativa y amplía el revólver",
+    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    body: `<strong>Ares Management</strong> renovó su línea de crédito corporativa revolvente, ampliando su capacidad disponible. La renovación mejora la flexibilidad financiera del grupo para acometer nuevas inversiones y cubrir necesidades de capital operativo. Este tipo de operación es habitual en gestoras alternativas de gran escala y refleja la confianza del sindicato bancario en la solidez del negocio.`,
+    sources: [{ label: "Stock Titan", url: "https://www.stocktitan.net/" }]
+  },
+  {
+    id: 30,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Ares presentará en la conferencia US Financials de Morgan Stanley",
+    date: "29 de mayo de 2026", isoDate: "2026-05-29",
+    body: `<strong>Ares Management Corporation</strong> participará como ponente en la conferencia <strong>Morgan Stanley US Financials</strong>. La presencia en este foro institucional de primer nivel refleja el creciente protagonismo del gestor en el segmento de crédito privado y gestión alternativa. Se espera que la dirección actualice al mercado sobre perspectivas de captación y despliegue de capital.`,
+    sources: [{ label: "Standard Journal", url: "https://www.standard-journal.com/" }]
+  },
+  {
+    id: 31,
+    manager: "ares", managerLabel: "Ares Management",
+    severity: "green",
+    title: "Ares también presentará en la conferencia European Financials de Goldman Sachs",
+    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    body: `<strong>Ares Management</strong> participará en la <strong>Goldman Sachs European Financials Conference</strong>, consolidando su visibilidad ante inversores institucionales europeos. La gestora ha intensificado su presencia en Europa, donde gestiona fondos de crédito privado, infraestructura y real estate. La conferencia es un foro clave para actualizar el posicionamiento estratégico ante el mercado.`,
+    sources: [{ label: "Eagle-Tribune", url: "https://www.eagletribune.com/" }]
+  },
+  {
+    id: 32,
+    manager: "oaktree", managerLabel: "Oaktree Capital Management",
+    severity: "green",
+    title: "Oaktree financia a SharonAI mediante notas convertibles senior privadas",
+    date: "27 de mayo de 2026", isoDate: "2026-05-27",
+    body: `Oaktree Capital Management cerró una operación de financiación privada a <strong>SharonAI</strong> mediante <strong>notas convertibles senior</strong>. Latham & Watkins asesoró a Oaktree en la estructuración del instrumento. La operación encaja en la estrategia de deuda de Oaktree orientada a empresas tecnológicas en crecimiento, ofreciendo exposición al sector IA con protección crediticia gracias al rango senior y el componente convertible.`,
+    sources: [{ label: "Latham & Watkins", url: "https://www.lw.com/" }]
+  },
+  {
+    id: 33,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "green",
+    title: "Analistas comparan Brookfield Corp. y Brookfield AM: ¿cuál es mejor inversión?",
+    date: "29 de mayo de 2026", isoDate: "2026-05-29",
+    body: `The Motley Fool publicó un análisis comparativo entre <strong>Brookfield Corporation (BN)</strong> y <strong>Brookfield Asset Management (BAM)</strong>, dos entidades cotizadas del mismo grupo. El artículo destaca que BAM ofrece mayor pureza como gestora de activos alternativos con ingresos fee-based más predecibles, mientras BN proporciona más exposición a valor en balance. Se posiciona a BAM como opción preferida para inversores conservadores buscando ingresos estables.`,
+    sources: [{ label: "The Motley Fool", url: "https://www.fool.com/" }]
+  },
+  {
+    id: 34,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "yellow",
+    title: "Brookfield fusiona su brazo asegurador con la matriz corporativa",
+    date: "30 de mayo de 2026", isoDate: "2026-05-30",
+    body: `<strong>Brookfield Corporation</strong> anunció la combinación de su división de seguros con la compañía matriz, una reestructuración corporativa significativa. Para los inversores de <strong>Brookfield Asset Management (BAM)</strong>, el movimiento implica mayor complejidad en la estructura del grupo y potenciales cambios en la asignación de capital. Analistas señalan que la integración busca simplificar la gobernanza, aunque plantea interrogantes sobre el foco estratégico de cara al mercado de capitales.`,
+    sources: [{ label: "AOL / Barron's", url: "https://www.aol.com/" }]
+  },
 
   /* ══ SEMANA 26–30 MAYO 2026 ══════════════════════════ */
   {

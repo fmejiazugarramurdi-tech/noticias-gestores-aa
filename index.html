@@ -60,19 +60,11 @@
 
     .sep { width:1px; height:26px; background:var(--border); flex-shrink:0; }
 
-    .fg { display:flex; gap:5px; flex-wrap:wrap; align-items:center; }
+    .fg { display:flex; gap:5px; align-items:center; }
     .fg-label { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text2); white-space:nowrap; margin-right:2px; }
 
-    .chip { padding:5px 12px; border-radius:20px; border:1.5px solid var(--border); background:var(--surface2); color:var(--text2); font-size:.78rem; font-weight:600; cursor:pointer; transition:all .15s; user-select:none; white-space:nowrap; }
-    .chip:hover { border-color:var(--accent); color:var(--accent); }
-    .chip.on { color:#fff; border-color:transparent; }
-    .chip.on.sev-neg { background:linear-gradient(90deg,var(--red) 0%,var(--yellow) 100%); }
-    .chip.on.sev-all { background:#64748b; }
-    .chip.on.sev-red { background:var(--red); }
-    .chip.on.sev-yel { background:var(--yellow); }
-    .chip.on.sev-grn { background:var(--green); }
-    .chip.on.per     { background:#7c3aed; }
-    .chip.on.mgr     { background:var(--accent); }
+    .fsel { padding:6px 10px; border-radius:8px; border:1.5px solid var(--border); background:var(--surface2); color:var(--text); font-size:.82rem; font-weight:600; cursor:pointer; outline:none; transition:border-color .15s; }
+    .fsel:hover, .fsel:focus { border-color:var(--accent); }
 
     .rc { font-size:.78rem; color:var(--text2); margin-left:auto; white-space:nowrap; }
 
@@ -130,7 +122,7 @@
   <div class="header-inner">
     <div class="logo">📊 Monitor de Noticias <span>/ Gestores Alternativos Internacionales</span></div>
     <div class="header-right">
-      <div id="date-badge">Actualizado: 30 mayo 2026</div>
+      <div id="date-badge">Actualizado: 31 mayo 2026</div>
       <button class="theme-btn" id="themeBtn" title="Modo oscuro">🌙</button>
     </div>
   </div>
@@ -159,11 +151,13 @@
     <!-- Prioridad -->
     <div class="fg">
       <span class="fg-label">Prioridad</span>
-      <div class="chip on sev-neg" data-f="severity" data-v="negative">🔴🟡 Negativas</div>
-      <div class="chip sev-all"    data-f="severity" data-v="all">Todas</div>
-      <div class="chip sev-red"    data-f="severity" data-v="red">⚠ Grave</div>
-      <div class="chip sev-yel"    data-f="severity" data-v="yellow">! Atención</div>
-      <div class="chip sev-grn"    data-f="severity" data-v="green">✓ Normal</div>
+      <select class="fsel" id="sel-severity">
+        <option value="negative" selected>🔴🟡 Negativas</option>
+        <option value="all">Todas</option>
+        <option value="red">⚠ Grave</option>
+        <option value="yellow">! Atención</option>
+        <option value="green">✓ Normal</option>
+      </select>
     </div>
 
     <div class="sep"></div>
@@ -171,10 +165,12 @@
     <!-- Período -->
     <div class="fg">
       <span class="fg-label">Período</span>
-      <div class="chip per on" data-f="period" data-v="all">Todo</div>
-      <div class="chip per"    data-f="period" data-v="current">Esta semana</div>
-      <div class="chip per"    data-f="period" data-v="previous">Sem. anterior</div>
-      <div class="chip per"    data-f="period" data-v="month">Último mes</div>
+      <select class="fsel" id="sel-period">
+        <option value="all" selected>Todo</option>
+        <option value="current">Esta semana</option>
+        <option value="previous">Sem. anterior</option>
+        <option value="month">Último mes</option>
+      </select>
     </div>
 
     <div class="sep"></div>
@@ -182,11 +178,13 @@
     <!-- Gestor -->
     <div class="fg">
       <span class="fg-label">Gestor</span>
-      <div class="chip mgr on"  data-f="manager" data-v="all">Todos</div>
-      <div class="chip mgr"     data-f="manager" data-v="brookfield">Brookfield</div>
-      <div class="chip mgr"     data-f="manager" data-v="ares">Ares</div>
-      <div class="chip mgr"     data-f="manager" data-v="oaktree">Oaktree</div>
-      <div class="chip mgr"     data-f="manager" data-v="lexington">Lexington</div>
+      <select class="fsel" id="sel-manager">
+        <option value="all" selected>Todos</option>
+        <option value="brookfield">Brookfield</option>
+        <option value="ares">Ares</option>
+        <option value="oaktree">Oaktree</option>
+        <option value="lexington">Lexington</option>
+      </select>
     </div>
 
     <div class="rc" id="rc"></div>
@@ -373,17 +371,14 @@ function updateStats() {
 /* ════════════════════════════════════════════════
    EVENTOS — chips
 ════════════════════════════════════════════════ */
-document.querySelectorAll(".chip").forEach(chip => {
-  chip.addEventListener("click", () => {
-    const f = chip.dataset.f;
-    const v = chip.dataset.v;
-    document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(c => c.classList.remove("on"));
-    chip.classList.add("on");
-    if (f === "severity") activeSev    = v;
-    else if (f === "period") { activePeriod = v; updateBanner(); }
-    else                     activeMan    = v;
-    applyFilters();
-  });
+document.getElementById("sel-severity").addEventListener("change", e => {
+  activeSev = e.target.value; applyFilters();
+});
+document.getElementById("sel-period").addEventListener("change", e => {
+  activePeriod = e.target.value; updateBanner(); applyFilters();
+});
+document.getElementById("sel-manager").addEventListener("change", e => {
+  activeMan = e.target.value; applyFilters();
 });
 
 /* ════════════════════════════════════════════════

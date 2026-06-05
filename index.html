@@ -1,120 +1,158 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Monitor | Gestores Alternativos</title>
-  <style>
-    :root {
-      --bg:#f0f2f7; --surface:#fff; --surface2:#f7f8fc; --border:#e2e6f0;
-      --text:#1c2333; --text2:#5a6480; --accent:#2563eb; --accent-bg:#eff6ff;
-      --header-bg:#0f172a; --header-fg:#e2e8f0;
-      --shadow:0 2px 12px rgba(0,0,0,.08); --radius:10px;
-      --red:#dc2626; --red-bg:#fef2f2; --red-border:#fecaca;
-      --yellow:#d97706; --yellow-bg:#fffbeb; --yellow-border:#fde68a;
-      --green:#16a34a; --green-bg:#f0fdf4; --green-border:#bbf7d0;
-    }
-    [data-theme="dark"] {
-      --bg:#0d1117; --surface:#161b22; --surface2:#1c2128; --border:#30363d;
-      --text:#e6edf3; --text2:#8b949e; --accent:#58a6ff; --accent-bg:#1c2d41;
-      --header-bg:#010409; --header-fg:#c9d1d9; --shadow:0 2px 12px rgba(0,0,0,.4);
-      --red:#f87171; --red-bg:#2a1515; --red-border:#7f1d1d;
-      --yellow:#fbbf24; --yellow-bg:#2a2010; --yellow-border:#78350f;
-      --green:#4ade80; --green-bg:#102010; --green-border:#14532d;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monitor | Gestores Alternativos</title>
+<style>
+:root {
+  --bg:#f0f2f7; --surface:#fff; --surface2:#f7f8fc; --border:#e2e6f0;
+  --text:#1c2333; --text2:#5a6480; --accent:#2563eb; --accent-bg:#eff6ff;
+  --header-bg:#0f172a; --header-fg:#e2e8f0;
+  --shadow:0 2px 12px rgba(0,0,0,.08); --radius:10px;
+  --red:#dc2626; --red-bg:#fef2f2; --red-border:#fecaca;
+  --yellow:#d97706; --yellow-bg:#fffbeb; --yellow-border:#fde68a;
+  --green:#16a34a; --green-bg:#f0fdf4; --green-border:#bbf7d0;
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --surface:#161b22; --surface2:#1c2128; --border:#30363d;
+  --text:#e6edf3; --text2:#8b949e; --accent:#58a6ff; --accent-bg:#1c2d41;
+  --header-bg:#010409; --header-fg:#c9d1d9; --shadow:0 2px 12px rgba(0,0,0,.4);
+  --red:#f87171; --red-bg:#2a1515; --red-border:#7f1d1d;
+  --yellow:#fbbf24; --yellow-bg:#2a2010; --yellow-border:#78350f;
+  --green:#4ade80; --green-bg:#102010; --green-border:#14532d;
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; transition:background .25s,color .25s; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
 
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; transition:background .25s,color .25s; }
-    a { color:var(--accent); text-decoration:none; }
-    a:hover { text-decoration:underline; }
+/* ── Header ── */
+header { background:var(--header-bg); color:var(--header-fg); padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.3); }
+.header-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px; }
+.logo { font-size:1rem; font-weight:700; letter-spacing:.02em; white-space:nowrap; display:flex; align-items:center; gap:9px; }
+.logo span { opacity:.5; font-weight:400; font-size:.8rem; }
+.header-right { display:flex; align-items:center; gap:10px; }
+#date-badge { font-size:.75rem; background:rgba(255,255,255,.1); border-radius:20px; padding:3px 10px; white-space:nowrap; }
+.theme-btn { background:rgba(255,255,255,.12); border:none; color:var(--header-fg); border-radius:6px; width:34px; height:34px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+.theme-btn:hover { background:rgba(255,255,255,.22); }
 
-    /* ── Header ── */
-    header { background:var(--header-bg); color:var(--header-fg); padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.3); }
-    .header-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; gap:16px; }
-    .logo { font-size:1rem; font-weight:700; letter-spacing:.02em; white-space:nowrap; display:flex; align-items:center; gap:9px; }
-    .logo span { opacity:.5; font-weight:400; font-size:.8rem; }
-    .header-right { display:flex; align-items:center; gap:10px; }
-    #date-badge { font-size:.75rem; background:rgba(255,255,255,.1); border-radius:20px; padding:3px 10px; white-space:nowrap; }
-    .theme-btn { background:rgba(255,255,255,.12); border:none; color:var(--header-fg); border-radius:6px; width:34px; height:34px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:background .2s; }
-    .theme-btn:hover { background:rgba(255,255,255,.22); }
+/* ── Layout ── */
+main { max-width:1100px; margin:0 auto; padding:28px 20px 60px; }
 
-    /* ── Layout ── */
-    main { max-width:1100px; margin:0 auto; padding:28px 20px 60px; }
+/* ── Stats ── */
+.stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); gap:12px; margin-bottom:24px; }
+.stat-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:14px 18px; box-shadow:var(--shadow); }
+.s-label { font-size:.72rem; color:var(--text2); text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
+.s-value { font-size:1.65rem; font-weight:800; }
+.stat-card.c-total .s-value { color:var(--accent); }
+.stat-card.c-red   .s-value { color:var(--red); }
+.stat-card.c-yel   .s-value { color:var(--yellow); }
+.stat-card.c-grn   .s-value { color:var(--green); }
 
-    /* ── Stats ── */
-    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); gap:12px; margin-bottom:24px; }
-    .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:14px 18px; box-shadow:var(--shadow); }
-    .s-label { font-size:.72rem; color:var(--text2); text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
-    .s-value { font-size:1.65rem; font-weight:800; }
-    .stat-card.c-total .s-value { color:var(--accent); }
-    .stat-card.c-red   .s-value { color:var(--red); }
-    .stat-card.c-yel   .s-value { color:var(--yellow); }
-    .stat-card.c-grn   .s-value { color:var(--green); }
+/* ── Controls ── */
+.controls { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:14px 18px; box-shadow:var(--shadow); margin-bottom:16px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+.search-wrap { position:relative; flex:1; min-width:180px; }
+.search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text2); pointer-events:none; font-size:.9rem; }
+#search { width:100%; padding:8px 10px 8px 30px; border:1px solid var(--border); border-radius:7px; background:var(--surface2); color:var(--text); font-size:.88rem; outline:none; transition:border-color .2s; }
+#search:focus { border-color:var(--accent); }
+.sep { width:1px; height:26px; background:var(--border); flex-shrink:0; }
+.fg { display:flex; gap:5px; align-items:center; }
+.fg-label { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text2); white-space:nowrap; margin-right:2px; }
+.fsel { padding:6px 10px; border-radius:8px; border:1.5px solid var(--border); background:var(--surface2); color:var(--text); font-size:.82rem; font-weight:600; cursor:pointer; outline:none; transition:border-color .15s; }
+.fsel:hover, .fsel:focus { border-color:var(--accent); }
+.rc { font-size:.78rem; color:var(--text2); margin-left:auto; white-space:nowrap; }
 
-    /* ── Controls ── */
-    .controls { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:14px 18px; box-shadow:var(--shadow); margin-bottom:16px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
-    .search-wrap { position:relative; flex:1; min-width:180px; }
-    .search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text2); pointer-events:none; font-size:.9rem; }
-    #search { width:100%; padding:8px 10px 8px 30px; border:1px solid var(--border); border-radius:7px; background:var(--surface2); color:var(--text); font-size:.88rem; outline:none; transition:border-color .2s; }
-    #search:focus { border-color:var(--accent); }
+/* ── Period banner ── */
+.pbanner { background:var(--accent-bg); border:1px solid rgba(37,99,235,.3); border-radius:8px; padding:9px 14px; font-size:.82rem; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.pbanner.hidden { display:none; }
 
-    .sep { width:1px; height:26px; background:var(--border); flex-shrink:0; }
+/* ── ACORDEÓN POR MANAGER ── */
+.acordeon-list { display:flex; flex-direction:column; gap:10px; }
 
-    .fg { display:flex; gap:5px; align-items:center; }
-    .fg-label { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text2); white-space:nowrap; margin-right:2px; }
+.mgr-section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
 
-    .fsel { padding:6px 10px; border-radius:8px; border:1.5px solid var(--border); background:var(--surface2); color:var(--text); font-size:.82rem; font-weight:600; cursor:pointer; outline:none; transition:border-color .15s; }
-    .fsel:hover, .fsel:focus { border-color:var(--accent); }
+.mgr-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px; cursor:pointer;
+  background:var(--surface2); border-bottom:1px solid transparent;
+  transition:background .2s, border-color .2s;
+  gap:12px;
+}
+.mgr-header:hover { background:var(--accent-bg); border-bottom-color:var(--accent); }
+.mgr-header.open { background:var(--accent-bg); border-bottom:1px solid var(--border); }
 
-    .rc { font-size:.78rem; color:var(--text2); margin-left:auto; white-space:nowrap; }
+.mgr-header-left { display:flex; align-items:center; gap:10px; flex:1; min-width:0; }
+.mgr-emoji { font-size:1.2rem; flex-shrink:0; }
+.mgr-name { font-size:.95rem; font-weight:700; color:var(--text); }
 
-    /* ── Period banner ── */
-    .pbanner { background:var(--accent-bg); border:1px solid rgba(37,99,235,.3); border-radius:8px; padding:9px 14px; font-size:.82rem; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
-    .pbanner.hidden { display:none; }
+.mgr-header-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
 
-    /* ── Cards ── */
-    .cards-list { display:flex; flex-direction:column; gap:10px; }
-    .news-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; transition:transform .15s,box-shadow .15s; }
-    .news-card:hover { transform:translateY(-1px); box-shadow:0 4px 20px rgba(0,0,0,.12); }
-    .news-card.hidden { display:none; }
+.mgr-pill {
+  font-size:.65rem; font-weight:700; border-radius:20px; padding:3px 9px;
+  border:1.5px solid; white-space:nowrap;
+}
+.mgr-pill.has-red    { background:var(--red-bg);    color:var(--red);    border-color:var(--red-border); }
+.mgr-pill.has-yellow { background:var(--yellow-bg); color:var(--yellow); border-color:var(--yellow-border); }
+.mgr-pill.all-green  { background:var(--green-bg);  color:var(--green);  border-color:var(--green-border); }
 
-    .cbar { width:5px; flex-shrink:0; }
-    .cbar.red    { background:var(--red); }
-    .cbar.yellow { background:var(--yellow); }
-    .cbar.green  { background:var(--green); }
+.mgr-count { font-size:.72rem; color:var(--text2); white-space:nowrap; }
+.mgr-chevron { font-size:.75rem; color:var(--text2); transition:transform .25s; }
+.mgr-chevron.open { transform:rotate(180deg); }
 
-    .ci { padding:15px 20px; flex:1; min-width:0; }
-    .ct { display:flex; align-items:flex-start; gap:8px; margin-bottom:5px; flex-wrap:wrap; }
+/* ── Cuerpo del acordeón ── */
+.mgr-body { display:none; padding:16px 20px; }
+.mgr-body.open { display:block; }
 
-    .bsev { font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; border-radius:4px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
-    .bsev.red    { background:var(--red-bg);    color:var(--red);    border:1px solid var(--red-border);    }
-    .bsev.yellow { background:var(--yellow-bg); color:var(--yellow); border:1px solid var(--yellow-border); }
-    .bsev.green  { background:var(--green-bg);  color:var(--green);  border:1px solid var(--green-border);  }
+/* ── Grupos de severidad dentro del acordeón ── */
+.sev-group { margin-bottom:18px; }
+.sev-group:last-child { margin-bottom:0; }
 
-    .bmgr { font-size:.65rem; font-weight:600; background:var(--accent-bg); color:var(--accent); border:1px solid var(--accent); border-radius:4px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
-    .bnew { font-size:.65rem; font-weight:700; background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:4px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
+.sev-group-header {
+  display:flex; align-items:center; gap:7px;
+  font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+  margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border);
+}
+.sev-group-header.red    { color:var(--red); }
+.sev-group-header.yellow { color:var(--yellow); }
+.sev-group-header.green  { color:var(--green); }
 
-    .card-title { font-size:.96rem; font-weight:700; color:var(--text); line-height:1.38; flex:1; }
-    .card-meta  { font-size:.74rem; color:var(--text2); margin-bottom:7px; }
-    .card-body  { font-size:.875rem; color:var(--text2); line-height:1.6; }
-    .card-body strong { color:var(--text); }
-    .card-src   { margin-top:9px; font-size:.74rem; display:flex; gap:7px; flex-wrap:wrap; color:var(--text2); }
-    .card-src a { color:var(--accent); }
+/* ── Tarjetas dentro del acordeón ── */
+.news-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; box-shadow:var(--shadow); overflow:hidden; display:flex; transition:transform .15s, box-shadow .15s; margin-bottom:8px; }
+.news-card:last-child { margin-bottom:0; }
+.news-card:hover { transform:translateY(-1px); box-shadow:0 4px 20px rgba(0,0,0,.12); }
+.news-card.hidden { display:none; }
 
-    /* ── Empty ── */
-    #empty { display:none; text-align:center; padding:60px 20px; color:var(--text2); }
-    #empty svg { margin-bottom:12px; opacity:.25; }
-    #empty p { font-size:.9rem; }
+.cbar { width:5px; flex-shrink:0; }
+.cbar.red    { background:var(--red); }
+.cbar.yellow { background:var(--yellow); }
+.cbar.green  { background:var(--green); }
 
-    /* ── Footer ── */
-    footer { text-align:center; font-size:.74rem; color:var(--text2); padding:24px 20px 32px; line-height:1.7; }
+.ci { padding:13px 18px; flex:1; min-width:0; }
+.ct { display:flex; align-items:flex-start; gap:8px; margin-bottom:5px; flex-wrap:wrap; }
 
-    @media(max-width:640px){
-      .logo span { display:none; }
-      .stats-grid { grid-template-columns:repeat(2,1fr); }
-      .sep { display:none; }
-    }
-  </style>
+.bnew { font-size:.65rem; font-weight:700; background:#fef3c7; color:#92400e; border:1px solid #fcd34d; border-radius:4px; padding:3px 8px; white-space:nowrap; flex-shrink:0; }
+.card-title { font-size:.94rem; font-weight:700; color:var(--text); line-height:1.38; flex:1; }
+.card-meta  { font-size:.74rem; color:var(--text2); margin-bottom:7px; }
+.card-body  { font-size:.875rem; color:var(--text2); line-height:1.6; }
+.card-body strong { color:var(--text); }
+.card-src   { margin-top:9px; font-size:.74rem; display:flex; gap:7px; flex-wrap:wrap; color:var(--text2); }
+.card-src a { color:var(--accent); }
+
+/* ── Empty ── */
+#empty { display:none; text-align:center; padding:60px 20px; color:var(--text2); }
+#empty p { font-size:.9rem; margin-top:12px; }
+
+/* ── Footer ── */
+footer { text-align:center; font-size:.74rem; color:var(--text2); padding:24px 20px 32px; line-height:1.7; }
+
+@media(max-width:640px){
+  .logo span { display:none; }
+  .stats-grid { grid-template-columns:repeat(2,1fr); }
+  .sep { display:none; }
+  .mgr-count { display:none; }
+}
+</style>
 </head>
 <body>
 
@@ -129,26 +167,21 @@
 </header>
 
 <main>
-
   <!-- Estadísticas -->
   <div class="stats-grid">
     <div class="stat-card c-total"><div class="s-label">Total noticias</div><div class="s-value" id="cnt-total">0</div></div>
-    <div class="stat-card c-red">  <div class="s-label">⚠ Graves</div>     <div class="s-value" id="cnt-red">0</div></div>
-    <div class="stat-card c-yel">  <div class="s-label">! Atención</div>    <div class="s-value" id="cnt-yellow">0</div></div>
-    <div class="stat-card c-grn">  <div class="s-label">✓ Normales</div>   <div class="s-value" id="cnt-green">0</div></div>
+    <div class="stat-card c-red">  <div class="s-label">⚠ Graves</div>   <div class="s-value" id="cnt-red">0</div></div>
+    <div class="stat-card c-yel">  <div class="s-label">! Atención</div>  <div class="s-value" id="cnt-yellow">0</div></div>
+    <div class="stat-card c-grn">  <div class="s-label">✓ Normales</div>  <div class="s-value" id="cnt-green">0</div></div>
   </div>
 
   <!-- Controles -->
   <div class="controls">
-
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
       <input type="text" id="search" placeholder="Buscar en noticias…" autocomplete="off"/>
     </div>
-
     <div class="sep"></div>
-
-    <!-- Prioridad -->
     <div class="fg">
       <span class="fg-label">Prioridad</span>
       <select class="fsel" id="sel-severity">
@@ -159,42 +192,21 @@
         <option value="green">✓ Normal</option>
       </select>
     </div>
-
     <div class="sep"></div>
-
-    <!-- Período -->
     <div class="fg">
       <span class="fg-label">Período</span>
       <select class="fsel" id="sel-period">
-        <option value="all" selected>Todo</option>
-        <option value="current">Esta semana</option>
-        <option value="previous">Sem. anterior</option>
-        <option value="month">Último mes</option>
+        <option value="all" selected>Todas las semanas</option>
       </select>
     </div>
-
-    <div class="sep"></div>
-
-    <!-- Gestor -->
-    <div class="fg">
-      <span class="fg-label">Gestor</span>
-      <select class="fsel" id="sel-manager">
-        <option value="all" selected>Todos</option>
-        <option value="brookfield">Brookfield</option>
-        <option value="ares">Ares</option>
-        <option value="oaktree">Oaktree</option>
-        <option value="lexington">Lexington</option>
-      </select>
-    </div>
-
     <div class="rc" id="rc"></div>
   </div>
 
   <!-- Banner de período activo -->
   <div class="pbanner hidden" id="pbanner">📅 <strong id="prange"></strong></div>
 
-  <!-- Tarjetas -->
-  <div class="cards-list" id="cards"></div>
+  <!-- ACORDEÓN POR MANAGER -->
+  <div class="acordeon-list" id="acordeon"></div>
 
   <div id="empty">
     <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -203,7 +215,6 @@
     </svg>
     <p>No hay noticias con los filtros seleccionados.</p>
   </div>
-
 </main>
 
 <footer>
@@ -213,152 +224,245 @@
 
 <!-- Datos de noticias (news-data.js se actualiza cada semana) -->
 <script src="news-data.js"></script>
-
 <script>
+/* ════════════════════════════════════════════════
+   CONFIGURACIÓN DE MANAGERS
+════════════════════════════════════════════════ */
+const MANAGERS = [
+  { key:"brookfield", label:"Brookfield Asset Management", emoji:"🏗️" },
+  { key:"ares",       label:"Ares Management",             emoji:"🦅" },
+  { key:"oaktree",    label:"Oaktree Capital Management",  emoji:"🌳" },
+  { key:"lexington",  label:"Lexington Partners",          emoji:"🔑" }
+];
+
+const SEV_ORDER = ["red","yellow","green"];
+const SEV_LABEL = { red:"🔴 Grave", yellow:"🟡 Atención", green:"🟢 Normal" };
 
 /* ════════════════════════════════════════════════
-   ESTADO
+   ESTADO DE FILTROS
 ════════════════════════════════════════════════ */
 let activeSev    = "negative";
-let activeMan    = "all";
 let activePeriod = "all";
 let searchQ      = "";
+
+// Track qué secciones están abiertas
+const openSections = new Set();
 
 /* ════════════════════════════════════════════════
    UTILIDADES DE FECHA
 ════════════════════════════════════════════════ */
-function weekBounds(weeksAgo) {
-  const d = new Date(CURRENT_DATE);
-  const dow = d.getDay() || 7;           // lun=1 … dom=7
-  d.setDate(d.getDate() - dow + 1 - weeksAgo * 7); // lunes
-  const start = new Date(d);
-  d.setDate(d.getDate() + 6);            // domingo
-  const end   = new Date(d);
-  end.setHours(23, 59, 59, 999);
-  return { start, end };
+
+// Dado cualquier Date, devuelve el lunes de esa semana (00:00:00)
+function getMondayOf(d) {
+  const copy = new Date(d);
+  const dow = copy.getDay() || 7; // dom=7
+  copy.setDate(copy.getDate() - dow + 1);
+  copy.setHours(0, 0, 0, 0);
+  return copy;
+}
+
+function fmtShort(d) {
+  return d.toLocaleDateString("es-ES", { day:"numeric", month:"short" });
 }
 
 function fmtDate(d) {
   return d.toLocaleDateString("es-ES", { day:"numeric", month:"long", year:"numeric" });
 }
 
+// Genera las semanas únicas (lun–dom) que aparecen en NEWS, ordenadas más reciente primero
+function buildWeekOptions() {
+  const seen = new Set();
+  const weeks = [];
+  NEWS.forEach(n => {
+    const mon = getMondayOf(new Date(n.isoDate));
+    const key = mon.toISOString().slice(0,10);
+    if (!seen.has(key)) {
+      seen.add(key);
+      const sun = new Date(mon);
+      sun.setDate(sun.getDate() + 6);
+      sun.setHours(23,59,59,999);
+      weeks.push({ key, start: new Date(mon), end: new Date(sun) });
+    }
+  });
+  // Más reciente primero
+  weeks.sort((a,b) => b.start - a.start);
+
+  const sel = document.getElementById("sel-period");
+  // Limpiar opciones previas excepto "Todas las semanas"
+  while (sel.options.length > 1) sel.remove(1);
+
+  weeks.forEach(w => {
+    const opt = document.createElement("option");
+    opt.value = w.key;
+    opt.textContent = `${fmtShort(w.start)} – ${fmtShort(w.end)}`;
+    sel.appendChild(opt);
+  });
+}
+
+// Almacena los rangos de semana para consulta rápida en inPeriod
+function getWeekRange(key) {
+  const mon = new Date(key);
+  mon.setHours(0,0,0,0);
+  const sun = new Date(mon);
+  sun.setDate(sun.getDate() + 6);
+  sun.setHours(23,59,59,999);
+  return { start: mon, end: sun };
+}
+
 function inPeriod(iso) {
   if (activePeriod === "all") return true;
   const d = new Date(iso);
-  if (activePeriod === "current") {
-    const { start, end } = weekBounds(0);
-    return d >= start && d <= end;
-  }
-  if (activePeriod === "previous") {
-    const { start, end } = weekBounds(1);
-    return d >= start && d <= end;
-  }
-  if (activePeriod === "month") {
-    const ago = new Date(CURRENT_DATE);
-    ago.setDate(ago.getDate() - 30);
-    return d >= ago;
-  }
-  return true;
+  const { start, end } = getWeekRange(activePeriod);
+  return d >= start && d <= end;
 }
 
-/* ════════════════════════════════════════════════
-   RENDER
-════════════════════════════════════════════════ */
-const SEV_LABEL = { red:"⚠ Grave", yellow:"! Atención", green:"✓ Normal" };
-
-// Calcula si la noticia es de "esta semana" para mostrar badge "Nuevo"
 function isThisWeek(iso) {
-  const { start, end } = weekBounds(0);
+  // Badge "Esta semana" = semana del CURRENT_DATE
+  const mon = getMondayOf(new Date(CURRENT_DATE));
+  const key = mon.toISOString().slice(0,10);
+  const { start, end } = getWeekRange(key);
   const d = new Date(iso);
   return d >= start && d <= end;
 }
 
-function buildCards() {
-  const container = document.getElementById("cards");
-  container.innerHTML = "";
-  // Ordenar: más reciente primero
-  const sorted = [...NEWS].sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
-
-  sorted.forEach(n => {
-    const card = document.createElement("div");
-    card.className = "news-card";
-    card.dataset.sev     = n.severity;
-    card.dataset.manager = n.manager;
-    card.dataset.iso     = n.isoDate;
-    card.dataset.txt     = (n.title + " " + n.body + " " + n.managerLabel).toLowerCase();
-
-    const srcs = n.sources.map(s =>
-      `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`
-    ).join(" · ");
-
-    const newBadge = isThisWeek(n.isoDate) ? `<span class="bnew">✦ Esta semana</span>` : "";
-
-    card.innerHTML = `
-      <div class="cbar ${n.severity}"></div>
-      <div class="ci">
-        <div class="ct">
-          <span class="bsev ${n.severity}">${SEV_LABEL[n.severity]}</span>
-          <span class="bmgr">${n.managerLabel}</span>
-          ${newBadge}
-          <div class="card-title">${n.title}</div>
-        </div>
-        <div class="card-meta">📅 ${n.date}</div>
-        <div class="card-body">${n.body}</div>
-        <div class="card-src">Fuentes: ${srcs}</div>
-      </div>`;
-    container.appendChild(card);
-  });
-}
-
 /* ════════════════════════════════════════════════
-   FILTROS
+   FILTRADO DE NOTICIAS
 ════════════════════════════════════════════════ */
 function matchSev(cardSev) {
-  if (activeSev === "all")      return true;
+  if (activeSev === "all") return true;
   if (activeSev === "negative") return cardSev === "red" || cardSev === "yellow";
   return cardSev === activeSev;
 }
 
-function applyFilters() {
-  const cards   = document.querySelectorAll(".news-card");
-  let   visible = 0;
+function getFilteredNews() {
+  return NEWS.filter(n =>
+    matchSev(n.severity) &&
+    inPeriod(n.isoDate) &&
+    (!searchQ || (n.title + " " + n.body + " " + n.managerLabel).toLowerCase().includes(searchQ))
+  );
+}
 
-  cards.forEach(card => {
-    const ok = matchSev(card.dataset.sev)
-            && (activeMan === "all" || card.dataset.manager === activeMan)
-            && (!searchQ || card.dataset.txt.includes(searchQ))
-            && inPeriod(card.dataset.iso);
+/* ════════════════════════════════════════════════
+   CONSTRUCCIÓN DEL ACORDEÓN
+════════════════════════════════════════════════ */
+function buildCard(n) {
+  const srcs = n.sources.map(s =>
+    `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`
+  ).join(" · ");
+  const newBadge = isThisWeek(n.isoDate) ? `<span class="bnew">✦ Esta semana</span>` : "";
 
-    card.classList.toggle("hidden", !ok);
-    if (ok) visible++;
+  const card = document.createElement("div");
+  card.className = "news-card";
+  card.innerHTML = `
+    <div class="cbar ${n.severity}"></div>
+    <div class="ci">
+      <div class="ct">
+        ${newBadge}
+        <div class="card-title">${n.title}</div>
+      </div>
+      <div class="card-meta">📅 ${n.date}</div>
+      <div class="card-body">${n.body}</div>
+      <div class="card-src">Fuentes: ${srcs}</div>
+    </div>`;
+  return card;
+}
+
+function buildAcordeon() {
+  const container = document.getElementById("acordeon");
+  container.innerHTML = "";
+
+  const filtered = getFilteredNews();
+  let totalVisible = 0;
+
+  MANAGERS.forEach(mgr => {
+    const mgrNews = filtered
+      .filter(n => n.manager === mgr.key)
+      .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+
+    if (!mgrNews.length) return;
+    totalVisible += mgrNews.length;
+
+    // Determinar pill de alerta
+    const hasRed    = mgrNews.some(n => n.severity === "red");
+    const hasYellow = mgrNews.some(n => n.severity === "yellow");
+    let pillClass, pillText;
+    if (hasRed)         { pillClass = "has-red";    pillText = "🔴 Alerta grave"; }
+    else if (hasYellow) { pillClass = "has-yellow";  pillText = "🟡 Atención"; }
+    else                { pillClass = "all-green";   pillText = "🟢 Sin alertas"; }
+
+    const isOpen = openSections.has(mgr.key);
+
+    // Sección
+    const section = document.createElement("div");
+    section.className = "mgr-section";
+
+    // Cabecera
+    const header = document.createElement("div");
+    header.className = "mgr-header" + (isOpen ? " open" : "");
+    header.innerHTML = `
+      <div class="mgr-header-left">
+        <span class="mgr-emoji">${mgr.emoji}</span>
+        <span class="mgr-name">${mgr.label}</span>
+      </div>
+      <div class="mgr-header-right">
+        <span class="mgr-pill ${pillClass}">${pillText}</span>
+        <span class="mgr-count">${mgrNews.length} noticia${mgrNews.length !== 1 ? "s" : ""}</span>
+        <span class="mgr-chevron ${isOpen ? "open" : ""}">▼</span>
+      </div>`;
+
+    // Cuerpo
+    const body = document.createElement("div");
+    body.className = "mgr-body" + (isOpen ? " open" : "");
+
+    // Grupos por severidad
+    SEV_ORDER.forEach(sev => {
+      const grupo = mgrNews.filter(n => n.severity === sev);
+      if (!grupo.length) return;
+
+      const grupoDiv = document.createElement("div");
+      grupoDiv.className = "sev-group";
+      grupoDiv.innerHTML = `
+        <div class="sev-group-header ${sev}">
+          ${SEV_LABEL[sev]}
+          <span style="font-weight:400;opacity:.7">(${grupo.length})</span>
+        </div>`;
+
+      grupo.forEach(n => grupoDiv.appendChild(buildCard(n)));
+      body.appendChild(grupoDiv);
+    });
+
+    // Toggle
+    header.addEventListener("click", () => {
+      const nowOpen = body.classList.contains("open");
+      if (nowOpen) {
+        body.classList.remove("open");
+        header.classList.remove("open");
+        header.querySelector(".mgr-chevron").classList.remove("open");
+        openSections.delete(mgr.key);
+      } else {
+        body.classList.add("open");
+        header.classList.add("open");
+        header.querySelector(".mgr-chevron").classList.add("open");
+        openSections.add(mgr.key);
+      }
+    });
+
+    section.appendChild(header);
+    section.appendChild(body);
+    container.appendChild(section);
   });
 
+  // Empty state
   const total = NEWS.length;
-  document.getElementById("rc").textContent = visible === total ? "" : `${visible} de ${total} noticias`;
-  document.getElementById("empty").style.display = visible === 0 ? "block" : "none";
+  document.getElementById("rc").textContent =
+    totalVisible === total ? "" : `${totalVisible} de ${total} noticias`;
+  document.getElementById("empty").style.display =
+    totalVisible === 0 ? "block" : "none";
 }
 
-function updateBanner() {
-  const banner = document.getElementById("pbanner");
-  const label  = document.getElementById("prange");
-  if (activePeriod === "all") {
-    banner.classList.add("hidden");
-    return;
-  }
-  banner.classList.remove("hidden");
-  if (activePeriod === "current") {
-    const { start, end } = weekBounds(0);
-    label.textContent = `Semana actual: ${fmtDate(start)} – ${fmtDate(end)}`;
-  } else if (activePeriod === "previous") {
-    const { start, end } = weekBounds(1);
-    label.textContent = `Semana anterior: ${fmtDate(start)} – ${fmtDate(end)}`;
-  } else if (activePeriod === "month") {
-    const ago = new Date(CURRENT_DATE);
-    ago.setDate(ago.getDate() - 30);
-    label.textContent = `Últimos 30 días: ${fmtDate(ago)} – ${fmtDate(CURRENT_DATE)}`;
-  }
-}
-
+/* ════════════════════════════════════════════════
+   STATS
+════════════════════════════════════════════════ */
 function updateStats() {
   const c = { red:0, yellow:0, green:0 };
   NEWS.forEach(n => c[n.severity]++);
@@ -369,24 +473,30 @@ function updateStats() {
 }
 
 /* ════════════════════════════════════════════════
-   EVENTOS — chips
+   BANNER DE PERÍODO
 ════════════════════════════════════════════════ */
-document.getElementById("sel-severity").addEventListener("change", e => {
-  activeSev = e.target.value; applyFilters();
-});
-document.getElementById("sel-period").addEventListener("change", e => {
-  activePeriod = e.target.value; updateBanner(); applyFilters();
-});
-document.getElementById("sel-manager").addEventListener("change", e => {
-  activeMan = e.target.value; applyFilters();
-});
+function updateBanner() {
+  const banner = document.getElementById("pbanner");
+  const label  = document.getElementById("prange");
+  if (activePeriod === "all") {
+    banner.classList.add("hidden"); return;
+  }
+  banner.classList.remove("hidden");
+  const { start, end } = getWeekRange(activePeriod);
+  label.textContent = `Semana: ${fmtDate(start)} – ${fmtDate(end)}`;
+}
 
 /* ════════════════════════════════════════════════
-   BÚSQUEDA
+   EVENTOS
 ════════════════════════════════════════════════ */
+document.getElementById("sel-severity").addEventListener("change", e => {
+  activeSev = e.target.value; buildAcordeon();
+});
+document.getElementById("sel-period").addEventListener("change", e => {
+  activePeriod = e.target.value; updateBanner(); buildAcordeon();
+});
 document.getElementById("search").addEventListener("input", e => {
-  searchQ = e.target.value.toLowerCase().trim();
-  applyFilters();
+  searchQ = e.target.value.toLowerCase().trim(); buildAcordeon();
 });
 
 /* ════════════════════════════════════════════════
@@ -398,16 +508,19 @@ function setTheme(dark) {
   themeBtn.textContent = dark ? "☀️" : "🌙";
   localStorage.setItem("theme", dark ? "dark" : "light");
 }
-themeBtn.addEventListener("click", () => setTheme(document.documentElement.dataset.theme !== "dark"));
+themeBtn.addEventListener("click", () =>
+  setTheme(document.documentElement.dataset.theme !== "dark")
+);
 const saved = localStorage.getItem("theme");
 if (saved) setTheme(saved === "dark");
 
 /* ════════════════════════════════════════════════
    INICIO
 ════════════════════════════════════════════════ */
-buildCards();
+buildWeekOptions();
 updateStats();
-applyFilters();
+updateBanner();
+buildAcordeon();
 </script>
 </body>
 </html>

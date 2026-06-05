@@ -160,7 +160,7 @@ footer { text-align:center; font-size:.74rem; color:var(--text2); padding:24px 2
   <div class="header-inner">
     <div class="logo">📊 Monitor de Noticias <span>/ Gestores Alternativos Internacionales</span></div>
     <div class="header-right">
-      <div id="date-badge">Actualizado: 31 mayo 2026</div>
+      <div id="date-badge">Actualizado: <span id="last-update"></span></div>
       <button class="theme-btn" id="themeBtn" title="Modo oscuro">🌙</button>
     </div>
   </div>
@@ -196,7 +196,18 @@ footer { text-align:center; font-size:.74rem; color:var(--text2); padding:24px 2
     <div class="fg">
       <span class="fg-label">Período</span>
       <select class="fsel" id="sel-period">
-        <option value="all" selected>Todas las semanas</option>
+        <option value="all" selected>Todos los meses</option>
+      </select>
+    </div>
+    <div class="sep"></div>
+    <div class="fg">
+      <span class="fg-label">Gestor</span>
+      <select class="fsel" id="sel-manager">
+        <option value="all" selected>Todos</option>
+        <option value="brookfield">Brookfield</option>
+        <option value="ares">Ares</option>
+        <option value="oaktree">Oaktree</option>
+        <option value="lexington">Lexington</option>
       </select>
     </div>
     <div class="rc" id="rc"></div>
@@ -243,6 +254,7 @@ const SEV_LABEL = { red:"🔴 Grave", yellow:"🟡 Atención", green:"🟢 Norma
 ════════════════════════════════════════════════ */
 let activeSev    = "negative";
 let activePeriod = "all";
+let activeMan    = "all";
 let searchQ      = "";
 
 // Track qué secciones están abiertas
@@ -269,34 +281,29 @@ function fmtDate(d) {
   return d.toLocaleDateString("es-ES", { day:"numeric", month:"long", year:"numeric" });
 }
 
-// Genera las semanas únicas (lun–dom) que aparecen en NEWS, ordenadas más reciente primero
-function buildWeekOptions() {
+function buildMonthOptions() {
   const seen = new Set();
-  const weeks = [];
-  NEWS.forEach(n => {
-    const mon = getMondayOf(new Date(n.isoDate));
-    const key = mon.toISOString().slice(0,10);
-    if (!seen.has(key)) {
-      seen.add(key);
-      const sun = new Date(mon);
-      sun.setDate(sun.getDate() + 6);
-      sun.setHours(23,59,59,999);
-      weeks.push({ key, start: new Date(mon), end: new Date(sun) });
-    }
-  });
-  // Más reciente primero
-  weeks.sort((a,b) => b.start - a.start);
-
+  NEWS.forEach(n => seen.add(n.isoDate.slice(0,7)));
+  const months = [...seen].sort((a,b) => b.localeCompare(a));
   const sel = document.getElementById("sel-period");
-  // Limpiar opciones previas excepto "Todas las semanas"
   while (sel.options.length > 1) sel.remove(1);
-
-  weeks.forEach(w => {
+  months.forEach(key => {
+    const [y, m] = key.split("-");
+    const d = new Date(+y, +m - 1, 1);
+    const label = d.toLocaleDateString("es-ES", { month:"long", year:"numeric" });
     const opt = document.createElement("option");
-    opt.value = w.key;
-    opt.textContent = `${fmtShort(w.start)} – ${fmtShort(w.end)}`;
+    opt.value = key;
+    opt.textContent = label.charAt(0).toUpperCase() + label.slice(1);
     sel.appendChild(opt);
   });
+}
+
+function updateLastDate() {
+  const last = NEWS.map(n => n.isoDate).sort().reverse()[0];
+  const d = new Date(last + "T12:00:00");
+  const label = d.toLocaleDateString("es-ES", { day:"numeric", month:"long", year:"numeric" });
+  const el = document.getElementById("last-update");
+  if (el) el.textContent = label;
 }
 
 // Almacena los rangos de semana para consulta rápida en inPeriod
@@ -311,9 +318,7 @@ function getWeekRange(key) {
 
 function inPeriod(iso) {
   if (activePeriod === "all") return true;
-  const d = new Date(iso);
-  const { start, end } = getWeekRange(activePeriod);
-  return d >= start && d <= end;
+  return iso.slice(0,7) === activePeriod;
 }
 
 function isThisWeek(iso) {
@@ -338,6 +343,7 @@ function getFilteredNews() {
   return NEWS.filter(n =>
     matchSev(n.severity) &&
     inPeriod(n.isoDate) &&
+    (activeMan === "all" || n.manager === activeMan) &&
     (!searchQ || (n.title + " " + n.body + " " + n.managerLabel).toLowerCase().includes(searchQ))
   );
 }
@@ -498,6 +504,9 @@ document.getElementById("sel-period").addEventListener("change", e => {
 document.getElementById("search").addEventListener("input", e => {
   searchQ = e.target.value.toLowerCase().trim(); buildAcordeon();
 });
+document.getElementById("sel-manager").addEventListener("change", e => {
+  activeMan = e.target.value; buildAcordeon();
+});
 
 /* ════════════════════════════════════════════════
    TEMA OSCURO
@@ -517,7 +526,8 @@ if (saved) setTheme(saved === "dark");
 /* ════════════════════════════════════════════════
    INICIO
 ════════════════════════════════════════════════ */
-buildWeekOptions();
+buildMonthOptions();
+updateLastDate();
 updateStats();
 updateBanner();
 buildAcordeon();

@@ -1,127 +1,117 @@
 // ═══════════════════════════════════════════════════════
 //  news-data.js  —  Datos de noticias
-//  Actualizado por: GitHub Action (fetch) + Claude (classify)
-//  NO editar manualmente — usar /classify-news en Claude Code
+//  Actualizado: 04 junio 2026  |  Total: 31 noticias
+//  IDs 1-31 sin duplicados
 // ═══════════════════════════════════════════════════════
 
-const CURRENT_DATE = new Date("2026-05-31");
+const CURRENT_DATE = new Date("2026-06-04");
 
 // DATA START — Claude inserta noticias nuevas AQUÍ ARRIBA
 const NEWS = [
 
-  /* ══ SEMANA 31 MAYO – 1 JUNIO 2026 ══════════════════ */
+  /* ══ SEMANA 01–04 JUNIO 2026 ════════════════════════ */
   {
-    id: 27,
-    manager: "ares", managerLabel: "Ares Management",
-    severity: "green",
-    title: "Ares y Scion Group adquieren cartera de vivienda estudiantil por $910M",
-    date: "26 de mayo de 2026", isoDate: "2026-05-26",
-    body: `Ares Management se asoció con <strong>Scion Group</strong> para adquirir una cartera de vivienda estudiantil valorada en <strong>$910 millones</strong>. La operación refuerza la apuesta de Ares por el sector residencial alternativo, añadiendo activos en campus universitarios de alto perfil. Scion Group, uno de los mayores operadores de vivienda estudiantil de EE.UU., actuará como gestor de los activos. La transacción se financia mediante deuda senior y capital institucional.`,
-    sources: [{ label: "Multifamily Dive", url: "https://www.multifamilydive.com/" }]
-  },
-  {
-    id: 28,
+    id: 31,
     manager: "ares", managerLabel: "Ares Management",
     severity: "yellow",
-    title: "Analistas cuestionan si Ares está sobrevalorada tras el rebote reciente",
-    date: "30 de mayo de 2026", isoDate: "2026-05-30",
-    body: `Tras el fuerte rebote de la acción de <strong>Ares Management (NYSE: ARES)</strong>, analistas de Simply Wall St. advierten de que el mercado puede estar descontando ya un escenario excesivamente optimista. El informe señala que la cotización actual implica expectativas de crecimiento que podrían ser difíciles de cumplir en un entorno de tipos elevados y compresión de spreads en crédito privado. Se recomienda cautela antes de ampliar posiciones.`,
-    sources: [{ label: "Simply Wall St.", url: "https://simplywall.st/" }]
-  },
-  {
-    id: 29,
-    manager: "ares", managerLabel: "Ares Management",
-    severity: "green",
-    title: "Ares renueva su línea de crédito corporativa y amplía el revólver",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
-    body: `<strong>Ares Management</strong> renovó su línea de crédito corporativa revolvente, ampliando su capacidad disponible. La renovación mejora la flexibilidad financiera del grupo para acometer nuevas inversiones y cubrir necesidades de capital operativo. Este tipo de operación es habitual en gestoras alternativas de gran escala y refleja la confianza del sindicato bancario en la solidez del negocio.`,
-    sources: [{ label: "Stock Titan", url: "https://www.stocktitan.net/" }]
+    title: "Ares acreedor de $547M en la quiebra de Eagle Football Group de John Textor",
+    date: "3 de junio de 2026", isoDate: "2026-06-03",
+    body: `Ares Management figura como acreedor por más de <strong>$547M</strong> en el proceso de administración concursal de Eagle Football Group, el holding de clubes de fútbol de John Textor. La recuperación dependerá de la venta de activos clave: el <strong>Olympique Lyonnais</strong> (Francia) y una participación en el <strong>SAF Botafogo</strong> (Brasil). Es la primera exposición pública significativa de Ares a riesgo de impago en el sector deportivo.`,
+    sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-06-03/ares-owed-547-million-after-collapse-of-textor-s-eagle-football" }]
   },
   {
     id: 30,
     manager: "ares", managerLabel: "Ares Management",
     severity: "green",
-    title: "Ares presentará en la conferencia US Financials de Morgan Stanley",
-    date: "29 de mayo de 2026", isoDate: "2026-05-29",
-    body: `<strong>Ares Management Corporation</strong> participará como ponente en la conferencia <strong>Morgan Stanley US Financials</strong>. La presencia en este foro institucional de primer nivel refleja el creciente protagonismo del gestor en el segmento de crédito privado y gestión alternativa. Se espera que la dirección actualice al mercado sobre perspectivas de captación y despliegue de capital.`,
-    sources: [{ label: "Standard Journal", url: "https://www.standard-journal.com/" }]
+    title: "Co-Presidente Jacobson defiende el crédito privado: «hay una desconexión real con los titulares negativos»",
+    date: "4 de junio de 2026", isoDate: "2026-06-04",
+    body: `Blair Jacobson, Co-Presidente de Ares, declaró en Bloomberg TV que existe una <strong>«desconexión real»</strong> entre los titulares negativos sobre crédito privado y la realidad operativa de las ~3.000 empresas en cartera de Ares, que crecen entre el <strong>8% y el 12% anual</strong>. Jacobson señaló que los grandes gestores son beneficiarios netos de la consolidación del sector.`,
+    sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-06-04/ares-jacobson-slams-disconnect-over-private-credit-headlines" }]
   },
   {
-    id: 31,
-    manager: "ares", managerLabel: "Ares Management",
+    id: 29,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
     severity: "green",
-    title: "Ares también presentará en la conferencia European Financials de Goldman Sachs",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
-    body: `<strong>Ares Management</strong> participará en la <strong>Goldman Sachs European Financials Conference</strong>, consolidando su visibilidad ante inversores institucionales europeos. La gestora ha intensificado su presencia en Europa, donde gestiona fondos de crédito privado, infraestructura y real estate. La conferencia es un foro clave para actualizar el posicionamiento estratégico ante el mercado.`,
-    sources: [{ label: "Eagle-Tribune", url: "https://www.eagletribune.com/" }]
+    title: "Brookfield apuesta $50.000M en infraestructura IA: fondo activo con Bloom Energy como primera inversión",
+    date: "3 de junio de 2026", isoDate: "2026-06-03",
+    body: `Brookfield ha desplegado su nuevo <strong>fondo de infraestructura IA</strong> con un objetivo de captación de <strong>$50.000M</strong>. La primera inversión fue hasta <strong>$5.000M</strong> comprometidos con Bloom Energy para desplegar sus celdas de combustible en centros de datos con demanda de IA. Es el mayor vehículo de infraestructura IA lanzado por una gestora de activos alternativos hasta la fecha.`,
+    sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-06-03/brookfield-rolls-out-new-ai-infrastructure-playbook" }]
   },
   {
-    id: 32,
+    id: 28,
+    manager: "brookfield", managerLabel: "Brookfield Asset Management",
+    severity: "green",
+    title: "JV logístico $1.000M con Concert Properties: 5,3M sqft industriales en Canadá 100% ocupados",
+    date: "4 de junio de 2026", isoDate: "2026-06-04",
+    body: `Un afiliado de Brookfield formalizó una <strong>joint venture de $1.000M</strong> con Concert Properties para adquirir una cartera de <strong>ocho activos industriales canadienses</strong> — 5,3 millones de sqft de logística urbana en los principales mercados del país, con ocupación del 100%. Brookfield calificó los activos como alineados con su estrategia global de logística en mercados con alta barrera de entrada.`,
+    sources: [
+      { label: "Investment Executive", url: "https://www.investmentexecutive.com/news/industry/deals-concert-brookfield-asset-management-partner-on-industrial-portfolio/" },
+      { label: "CoStar", url: "https://www.costar.com/article/1859717157/brookfield-acquires-interest-in-concert-properties-logistics-portfolio" }
+    ]
+  },
+  {
+    id: 27,
     manager: "oaktree", managerLabel: "Oaktree Capital Management",
     severity: "green",
-    title: "Oaktree financia a SharonAI mediante notas convertibles senior privadas",
-    date: "27 de mayo de 2026", isoDate: "2026-05-27",
-    body: `Oaktree Capital Management cerró una operación de financiación privada a <strong>SharonAI</strong> mediante <strong>notas convertibles senior</strong>. Latham & Watkins asesoró a Oaktree en la estructuración del instrumento. La operación encaja en la estrategia de deuda de Oaktree orientada a empresas tecnológicas en crecimiento, ofreciendo exposición al sector IA con protección crediticia gracias al rango senior y el componente convertible.`,
-    sources: [{ label: "Latham & Watkins", url: "https://www.lw.com/" }]
-  },
-  {
-    id: 33,
-    manager: "brookfield", managerLabel: "Brookfield Asset Management",
-    severity: "green",
-    title: "Analistas comparan Brookfield Corp. y Brookfield AM: ¿cuál es mejor inversión?",
-    date: "29 de mayo de 2026", isoDate: "2026-05-29",
-    body: `The Motley Fool publicó un análisis comparativo entre <strong>Brookfield Corporation (BN)</strong> y <strong>Brookfield Asset Management (BAM)</strong>, dos entidades cotizadas del mismo grupo. El artículo destaca que BAM ofrece mayor pureza como gestora de activos alternativos con ingresos fee-based más predecibles, mientras BN proporciona más exposición a valor en balance. Se posiciona a BAM como opción preferida para inversores conservadores buscando ingresos estables.`,
-    sources: [{ label: "The Motley Fool", url: "https://www.fool.com/" }]
-  },
-  {
-    id: 34,
-    manager: "brookfield", managerLabel: "Brookfield Asset Management",
-    severity: "yellow",
-    title: "Brookfield fusiona su brazo asegurador con la matriz corporativa",
-    date: "30 de mayo de 2026", isoDate: "2026-05-30",
-    body: `<strong>Brookfield Corporation</strong> anunció la combinación de su división de seguros con la compañía matriz, una reestructuración corporativa significativa. Para los inversores de <strong>Brookfield Asset Management (BAM)</strong>, el movimiento implica mayor complejidad en la estructura del grupo y potenciales cambios en la asignación de capital. Analistas señalan que la integración busca simplificar la gobernanza, aunque plantea interrogantes sobre el foco estratégico de cara al mercado de capitales.`,
-    sources: [{ label: "AOL / Barron's", url: "https://www.aol.com/" }]
+    title: "Oaktree y Macquarie financian Banco Plata de México con $300M en crédito privado",
+    date: "4 de junio de 2026", isoDate: "2026-06-04",
+    body: `Oaktree Capital Management y Macquarie Group participaron en una línea de crédito de <strong>$300M</strong> para el banco digital mexicano <strong>Banco Plata</strong>, como parte de una facilidad privada de $500M liderada por Nomura Securities. Refuerza la estrategia de Oaktree en crédito privado en mercados emergentes latinoamericanos.`,
+    sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-06-03/oaktree-macquarie-back-mexico-s-plata-with-300-million-line" }]
   },
 
-  /* ══ SEMANA 26–30 MAYO 2026 ══════════════════════════ */
+  /* ══ SEMANA 31 MAYO 2026 ════════════════════════════ */
   {
     id: 26,
+    manager: "lexington", managerLabel: "Lexington Partners",
+    severity: "green",
+    title: "Franklin Templeton lanza carteras modelo de mercados privados con Corastone: Lexington como pilar de secundarios PE",
+    date: "31 de mayo de 2026", isoDate: "2026-05-31",
+    body: `Franklin Templeton lanzó sus <strong>Private Markets Model Portfolios</strong> en colaboración con Corastone (infraestructura blockchain permisionada). <strong>Lexington Partners actúa como gestor central de secundarios PE y co-inversiones</strong> dentro del modelo, junto a Clarion Partners (real estate) y Benefit Street Partners (crédito privado). Franklin Templeton gestiona más de <strong>$1,74 billones en AUM</strong> a 30 de abril de 2026.`,
+    sources: [
+      { label: "BusinessWire", url: "https://www.businesswire.com/news/home/20260511797361/en/Franklin-Templeton-Launches-Private-Model-Portfolios-with-Corastone-to-Help-Advisors-Access-Private-Markets" },
+      { label: "Morningstar", url: "https://www.morningstar.com/news/business-wire/20260511797361/franklin-templeton-launches-private-model-portfolios-with-corastone-to-help-advisors-access-private-markets" }
+    ]
+  },
+
+  /* ══ SEMANA 26–30 MAYO 2026 ════════════════════════ */
+  {
+    id: 25,
     manager: "oaktree", managerLabel: "Oaktree Capital Management",
     severity: "green",
     title: "Oaktree y Pantheon lanzan alianza de préstamo directo europeo con objetivo de €1.000M",
     date: "28 de mayo de 2026", isoDate: "2026-05-28",
-    body: `Oaktree Capital Management se asoció con Pantheon Ventures (gestora con <strong>$85.000M en AUM</strong>) para impulsar su estrategia de préstamo directo europeo hasta <strong>€1.000M (~$1.200M)</strong>. Pantheon aportará capital fresco sobre una cartera semilla existente. La estrategia se centrará en préstamos senior garantizados de primer rango a empresas de Europa y el Reino Unido. Oaktree señaló que este será el primero de varios fondos dedicados a direct lending europeo.`,
+    body: `Oaktree Capital Management se asoció con Pantheon Ventures (gestora con <strong>$85.000M en AUM</strong>) para impulsar su estrategia de préstamo directo europeo hasta <strong>€1.000M (~$1.200M)</strong>. La estrategia se centrará en préstamos senior garantizados de primer rango a empresas de Europa y el Reino Unido.`,
     sources: [
       { label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-05-28/oaktree-partners-with-pantheon-to-boost-european-direct-lending" },
       { label: "Alt. Credit Investor", url: "https://alternativecreditinvestor.com/2026/05/28/oaktree-secures-pantheon-backing-for-european-direct-lending-expansion/" }
     ]
   },
   {
-    id: 25,
+    id: 24,
     manager: "brookfield", managerLabel: "Brookfield Asset Management",
     severity: "green",
     title: "Dividendo trimestral $0,5025/acción con yield 4,12% — fecha récord 29 mayo",
     date: "29 de mayo de 2026", isoDate: "2026-05-29",
-    body: `El Consejo de Administración de Brookfield Asset Management (NYSE: BAM) declaró un <strong>dividendo trimestral de $0,5025 por acción</strong>, pagadero el 30 de junio de 2026 a accionistas registrados a cierre del 29 de mayo. El dividendo ofrece un <em>yield</em> anualizado del <strong>4,12%</strong>, en línea con la política de distribución histórica de la firma.`,
+    body: `El Consejo de Administración de Brookfield Asset Management (NYSE: BAM) declaró un <strong>dividendo trimestral de $0,5025 por acción</strong>, pagadero el 30 de junio de 2026. El dividendo ofrece un <em>yield</em> anualizado del <strong>4,12%</strong>.`,
     sources: [
       { label: "GuruFocus", url: "https://www.gurufocus.com/news/8846212/bam-declares-quarterly-dividend-of-05025-with-412-yield" },
       { label: "SEC 8-K", url: "https://www.sec.gov/Archives/edgar/data/0001937926/000117184326003183/exh_991.htm" }
     ]
   },
   {
-    id: 24,
+    id: 23,
     manager: "ares", managerLabel: "Ares Management",
     severity: "green",
     title: "Co-Presidente Jacobson presenta en Goldman Sachs European Financials Conference el 3 de junio",
     date: "28 de mayo de 2026", isoDate: "2026-05-28",
-    body: `Ares Management anunció que su Co-Presidente <strong>Blair Jacobson</strong> presentará en el Goldman Sachs European Financials Conference el <strong>3 de junio de 2026</strong>. La presentación estará disponible en webcast en vivo y en diferido en la sección de Relaciones con Inversores de aresmgmt.com.`,
+    body: `Ares Management anunció que su Co-Presidente <strong>Blair Jacobson</strong> presentará en el Goldman Sachs European Financials Conference el <strong>3 de junio de 2026</strong>. La presentación estará disponible en webcast en la sección de Relaciones con Inversores de aresmgmt.com.`,
     sources: [
       { label: "Yahoo Finance", url: "https://finance.yahoo.com/markets/stocks/articles/ares-management-corporation-present-goldman-233000299.html" },
       { label: "StockTitan", url: "https://www.stocktitan.net/news/ARES/ares-management-corporation-to-present-at-the-goldman-sachs-european-5q6p0dudm7x4.html" }
     ]
   },
 
-  /* ══ BROOKFIELD ══════════════════════════════════════ */
+  /* ══ BROOKFIELD ════════════════════════════════════ */
   {
     id: 1,
     manager: "brookfield", managerLabel: "Brookfield Asset Management",
@@ -158,7 +148,7 @@ const NEWS = [
     severity: "green",
     title: "Resultados Q1 2026 sólidos: en camino de ser el mayor año de captación histórico",
     date: "8 de mayo de 2026", isoDate: "2026-05-08",
-    body: `Brookfield reportó resultados fuertes en Q1 2026. Los fondos co-gestionados (Primary Wave, 17Capital, Pinegrove) cerraron por encima de sus objetivos. La firma espera que 2026 sea el mayor año de captación de capital de su historia.`,
+    body: `Brookfield reportó resultados fuertes en Q1 2026. FRE de $772M (+11% interanual). La firma espera que 2026 sea el mayor año de captación de capital de su historia, con $67.000M captados en lo que va de año.`,
     sources: [
       { label: "Bloomberg", url: "https://www.bloomberg.com/news/newsletters/2026-05-08/brookfield-asset-management-s-safe-assets-have-strong-quarter" },
       { label: "Seeking Alpha", url: "https://seekingalpha.com/article/4902789-brookfield-asset-management-2026-set-to-be-record-year-for-fee-bearing-capital-formation" }
@@ -183,14 +173,14 @@ const NEWS = [
     sources: [{ label: "Bloomberg Law", url: "https://news.bloomberglaw.com/employee-benefits/brookfield-asset-management-cleared-in-401k-plan-fund-lawsuit" }]
   },
 
-  /* ══ ARES ════════════════════════════════════════════ */
+  /* ══ ARES ══════════════════════════════════════════ */
   {
     id: 7,
     manager: "ares", managerLabel: "Ares Management",
     severity: "red",
     title: "ASIF bajo escrutinio: investigación por pérdidas de inversores y arbitrajes FINRA abiertos",
     date: "26 de mayo de 2026", isoDate: "2026-05-26",
-    body: `El fondo Ares Strategic Income Fund (BDC no listado) está bajo escrutinio por cómo fue comercializado entre inversores minoristas. Bufetes especializados investigan pérdidas y hay <strong>arbitrajes FINRA activos</strong>. La SEC tiene foco en 2026 sobre transparencia de productos de crédito privado. Ares también <strong>elevó las comisiones máximas del prospecto</strong> (clase D de 1,5% a 2%; nuevo límite del 2% para clase I).`,
+    body: `El fondo Ares Strategic Income Fund (BDC no listado) está bajo escrutinio por cómo fue comercializado entre inversores minoristas. Hay <strong>arbitrajes FINRA activos</strong>. Ares también <strong>elevó las comisiones máximas del prospecto</strong> (clase D de 1,5% a 2%; nuevo límite del 2% para clase I).`,
     sources: [{ label: "The White Law Group", url: "https://whitesecuritieslaw.com/ares-strategic-income-fund-securities-investigation/" }]
   },
   {
@@ -199,7 +189,7 @@ const NEWS = [
     severity: "red",
     title: "Ares recorta valoraciones de préstamos de software de Clearlake Capital por riesgo IA",
     date: "28 de abril de 2026", isoDate: "2026-04-28",
-    body: `Ares redujo el valor de los préstamos a tres compañías de software participadas por Clearlake Capital, advirtiendo de <strong>"conversaciones difíciles"</strong> por venir con empresas expuestas a disrupción por IA. Primer reconocimiento público de una gestora de este tamaño sobre quiebras de valor vinculadas a riesgo IA en cartera de crédito privado.`,
+    body: `Ares redujo el valor de los préstamos a tres compañías de software participadas por Clearlake Capital, advirtiendo de <strong>"conversaciones difíciles"</strong> por venir con empresas expuestas a disrupción por IA. Primer reconocimiento público de una gestora de este tamaño sobre quiebras de valor por riesgo IA.`,
     sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-04-28/ares-slashes-value-of-three-clearlake-owned-software-companies" }]
   },
   {
@@ -208,7 +198,7 @@ const NEWS = [
     severity: "yellow",
     title: "~$1.000M en software de ARCC con riesgo IA «medio»: revisión externa activa",
     date: "28 de abril de 2026", isoDate: "2026-04-28",
-    body: `Una auditoría externa sobre Ares Capital Corp. ($29.500M de cartera) identificó que el <strong>14% de las inversiones en software tienen riesgo IA «medio»</strong> y el 1% riesgo «alto» — unos $1.000M en conjunto. El 85% restante está en riesgo «bajo». Se anticipan posibles amortizaciones adicionales.`,
+    body: `Una auditoría externa sobre Ares Capital Corp. ($29.500M de cartera) identificó que el <strong>14% de las inversiones en software tienen riesgo IA «medio»</strong> y el 1% riesgo «alto» — unos $1.000M en conjunto. Se anticipan posibles amortizaciones adicionales.`,
     sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-04-28/ares-sees-1-billion-of-bdc-s-software-bets-at-medium-ai-risk" }]
   },
   {
@@ -217,7 +207,7 @@ const NEWS = [
     severity: "yellow",
     title: "Q1 2026: BPA por debajo de estimaciones y compresión de márgenes",
     date: "1 de mayo de 2026", isoDate: "2026-05-01",
-    body: `Ares publicó resultados de Q1 2026: BPA de <strong>$1,24 frente a estimaciones de $1,36</strong> (miss de $0,12). Ingresos de $1.290M superaron estimaciones de $1.210M. La compresión de márgenes es el principal punto de atención, aunque la captación récord de $30.000M (+45% interanual) mitiga las preocupaciones.`,
+    body: `Ares publicó resultados de Q1 2026: BPA de <strong>$1,24 frente a estimaciones de $1,36</strong> (miss de $0,12). Ingresos de $1.290M. La compresión de márgenes es el principal punto de atención, aunque la captación récord mitiga las preocupaciones.`,
     sources: [
       { label: "Yahoo Finance", url: "https://finance.yahoo.com/markets/stocks/articles/ares-expanding-aum-balance-aid-151100059.html" },
       { label: "Simply Wall St", url: "https://simplywall.st/stocks/us/diversified-financials/nyse-ares/ares-management/news/ares-management-ares-q1-2026-margin-compression-challenges-b" }
@@ -227,9 +217,9 @@ const NEWS = [
     id: 11,
     manager: "ares", managerLabel: "Ares Management",
     severity: "green",
-    title: "Captación récord Q1 2026: $30.000M (+45% interanual)",
+    title: "Captación récord Q1 2026: $30.000M (+45% interanual). Dividendo $1,35/acción (+20%)",
     date: "1 de mayo de 2026", isoDate: "2026-05-01",
-    body: `Ares logró su mayor fundraising trimestral de la historia en Q1 2026, con <strong>$30.000M captados</strong> — un aumento del 45% respecto al mismo período de 2025.`,
+    body: `Ares logró su mayor fundraising trimestral de la historia, con <strong>$30.000M captados</strong> (+45% interanual). Declaró dividendo de <strong>$1,35/acción</strong> (+20% vs año anterior), pagadero el 30 de junio de 2026.`,
     sources: [{ label: "QuiverQuant", url: "https://www.quiverquant.com/news/ARES+MANAGEMENT+($ARES)+Releases+Q1+2026+Earnings" }]
   },
   {
@@ -260,7 +250,7 @@ const NEWS = [
     sources: [{ label: "Yahoo Finance", url: "https://finance.yahoo.com/markets/stocks/articles/ares-capital-corporation-ares-strategic-104500188.html" }]
   },
 
-  /* ══ OAKTREE ═════════════════════════════════════════ */
+  /* ══ OAKTREE ══════════════════════════════════════ */
   {
     id: 15,
     manager: "oaktree", managerLabel: "Oaktree Capital Management",
@@ -276,7 +266,7 @@ const NEWS = [
     severity: "yellow",
     title: "Oaktree BDC amortiza préstamos de software y cuantifica 26% de exposición a IA",
     date: "5 de mayo de 2026", isoDate: "2026-05-05",
-    body: `Oaktree Specialty Lending Corp. ($2.800M) recortó en <strong>~3%</strong> el valor de sus préstamos de software. La BDC también notificó que el <strong>26% de su cartera</strong> tiene exposición a sectores con riesgo de disrupción por IA.`,
+    body: `Oaktree Specialty Lending Corp. ($2.800M) recortó en <strong>~3%</strong> el valor de sus préstamos de software. La BDC notificó que el <strong>26% de su cartera</strong> tiene exposición a sectores con riesgo de disrupción por IA.`,
     sources: [{ label: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-05-05/oaktree-bdc-marks-down-software-loans-flags-26-ai-exposure" }]
   },
   {
@@ -307,7 +297,7 @@ const NEWS = [
     sources: [{ label: "Bloomingbit", url: "https://en.bloomingbit.io/feed/news/112977" }]
   },
 
-  /* ══ LEXINGTON ═══════════════════════════════════════ */
+  /* ══ LEXINGTON ════════════════════════════════════ */
   {
     id: 20,
     manager: "lexington", managerLabel: "Lexington Partners",
@@ -340,15 +330,7 @@ const NEWS = [
     date: "22 de enero de 2026", isoDate: "2026-01-22",
     body: `Franklin Templeton y Lexington Partners lanzaron FLEX-I, subfondo del SICAV domiciliado en Luxemburgo, con más de <strong>$875M al lanzamiento</strong>. Abre el acceso al mercado europeo de inversores de patrimonio a los secundarios de private equity.`,
     sources: [{ label: "Lexington Partners", url: "https://www.lexingtonpartners.com/press-releases/franklin-templeton-and-lexington-partners-launch-first-registered-tender-offer-private-equity-secondaries-fund-for-u-s-wealth-channel/" }]
-  },
-  {
-    id: 23,
-    manager: "lexington", managerLabel: "Lexington Partners",
-    severity: "green",
-    title: "Posición líder consolidada: $82.000M de capitalización total como especialista global en secundarios",
-    date: "27 de mayo de 2026", isoDate: "2026-05-27",
-    body: `Lexington Partners mantiene su posición como uno de los mayores gestores de secundarios y co-inversión del mundo, con más de <strong>$82.000M de capitalización total</strong>. La integración con Franklin Templeton (2023) sigue generando sinergias positivas en distribución global.`,
-    sources: [{ label: "Lexington Partners", url: "https://www.lexingtonpartners.com/" }]
   }
+
 ];
 // DATA END

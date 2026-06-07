@@ -218,27 +218,45 @@ footer{text-align:center;font-size:.74rem;color:var(--text2);padding:24px 20px 3
   Fuentes: Bloomberg · Reuters · FT · Courthouse News · CMF Chile · SEC EDGAR · La Tercera · Diario Financiero
 </footer>
 
-<script src="news-data-v2.js?v=3"></script>
+<script src="news-data-v2.js"></script>
 <script>
 /* ── MANAGERS (generados dinámicamente desde NEWS) ── */
 const MGR_META = {
-  brookfield:    { label:"Brookfield Asset Management", emoji:"🏗️" },
-  larrainvial:   { label:"LarrainVial Activos AGF",     emoji:"⚖️" },
-  partnersgroup: { label:"Partners Group",              emoji:"🇨🇭" },
-  grupopatio:    { label:"Grupo Patio",                 emoji:"🏢" },
-  redmegacentro: { label:"Red Megacentro",              emoji:"🏭" },
-  onestream:     { label:"OneStream",                   emoji:"💻" },
-  credicorp:     { label:"Credicorp Capital",           emoji:"🦙" },
-  hellmanfriedman:{ label:"Hellman & Friedman",         emoji:"🦅" },
-  thomabravo:    { label:"Thoma Bravo",                 emoji:"🔐" },
-  toesca:        { label:"Toesca AGF",                  emoji:"📋" },
-  moneda:        { label:"Moneda Asset Management",     emoji:"🪙" },
-  harbourvest:   { label:"HarbourVest Partners",        emoji:"⚓" },
-  flintglobal:   { label:"Flint Global",                emoji:"🔥" },
-  patiocomer:    { label:"Patio Comercial",             emoji:"🏪" },
-  linkcapital:   { label:"Link Capital Partners AGF",   emoji:"🔗" },
-  volcom:        { label:"Volcom Capital AGF",          emoji:"🌊" },
-  warburgpincus: { label:"Warburg Pincus",              emoji:"🌐" },
+  brookfield:    { label:"Brookfield Asset Management",  emoji:"🏗️" },
+  larrainvial:   { label:"LarrainVial Activos AGF",      emoji:"⚖️" },
+  partnersgroup: { label:"Partners Group",               emoji:"🇨🇭" },
+  grupopatio:    { label:"Grupo Patio",                  emoji:"🏢" },
+  redmegacentro: { label:"Red Megacentro",               emoji:"🏭" },
+  onestream:     { label:"OneStream",                    emoji:"💻" },
+  credicorp:     { label:"Credicorp Capital",            emoji:"🦙" },
+  hellmanfriedman:{ label:"Hellman & Friedman",          emoji:"🦅" },
+  thomabravo:    { label:"Thoma Bravo",                  emoji:"🔐" },
+  toesca:        { label:"Toesca AGF",                   emoji:"📋" },
+  moneda:        { label:"Moneda Asset Management",      emoji:"🪙" },
+  harbourvest:   { label:"HarbourVest Partners",         emoji:"⚓" },
+  flintglobal:   { label:"Flint Global",                 emoji:"🔥" },
+  patiocomer:    { label:"Patio Comercial",              emoji:"🏪" },
+  linkcapital:   { label:"Link Capital Partners AGF",    emoji:"🔗" },
+  volcom:        { label:"Volcom Capital AGF",           emoji:"🌊" },
+  warburgpincus: { label:"Warburg Pincus",               emoji:"🌐" },
+  activaalt:     { label:"Activa Alternative Assets",    emoji:"🔵" },
+  activadebt:    { label:"Activa Private Debt",          emoji:"💰" },
+  banchile:      { label:"Banchile AGF",                 emoji:"🏦" },
+  blackstonesp:  { label:"Blackstone Strategic Partners",emoji:"⬛" },
+  btgpactual:    { label:"BTG Pactual AGF",              emoji:"🇧🇷" },
+  cmbprime:      { label:"CMB Prime AGF",                emoji:"📈" },
+  cumplo:        { label:"Cumplo AGF",                   emoji:"🤝" },
+  gsicapital:    { label:"GSI Capital AGF",              emoji:"📊" },
+  hgcapital:     { label:"HG Capital",                   emoji:"🖥️" },
+  hggenesis:     { label:"HG Genesis",                   emoji:"💡" },
+  independencia: { label:"Independencia AGF",            emoji:"🌲" },
+  linzor:        { label:"Linzor Capital Partners",      emoji:"🌎" },
+  megacentroagf: { label:"Megacentro AGF",               emoji:"🏬" },
+  newmountain:   { label:"New Mountain Capital",         emoji:"⛰️" },
+  oaktree:       { label:"Oaktree Capital Management",   emoji:"🌳" },
+  picton:        { label:"Picton AGF",                   emoji:"🎯" },
+  southerncross: { label:"Southern Cross",               emoji:"✴️" },
+  vistaequity:   { label:"Vista Equity Partners",        emoji:"👁️" },
 };
 
 const SEV_ORDER = ["red","yellow","green"];
@@ -346,15 +364,37 @@ function buildAcordeon() {
   const filtered = getFiltered();
   let total = 0;
 
-  // Agrupar por manager en el orden en que aparecen en MGR_META
-  const mgrKeys = Object.keys(MGR_META);
+  // Usar ALL_MANAGERS si existe, si no MGR_META
+  const mgrKeys = typeof ALL_MANAGERS !== "undefined" ? ALL_MANAGERS : Object.keys(MGR_META);
   const extra = [...new Set(NEWS.map(n=>n.manager))].filter(k=>!mgrKeys.includes(k));
   const allKeys = [...mgrKeys, ...extra];
 
   allKeys.forEach(key => {
     const mgrNews = filtered.filter(n=>n.manager===key)
       .sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate));
-    if(!mgrNews.length) return;
+
+    // Managers sin noticias: mostrar fila colapsada con estado "Sin noticias"
+    if(!mgrNews.length) {
+      // Solo mostrar si no hay filtro activo de keyword o búsqueda
+      if(activeKw!=="all" || searchQ) return;
+      const meta = MGR_META[key] || { label:key, emoji:"🏢" };
+      const section = document.createElement("div");
+      section.className = "mgr-section";
+      const header = document.createElement("div");
+      header.className = "mgr-header";
+      header.style.cursor = "default";
+      header.innerHTML = `
+        <div class="mgr-header-left">
+          <span class="mgr-emoji" style="opacity:.4">${meta.emoji}</span>
+          <span class="mgr-name" style="opacity:.5">${meta.label}</span>
+        </div>
+        <div class="mgr-header-right">
+          <span class="mgr-pill all-green" style="opacity:.6">⚪ Sin noticias en el período</span>
+        </div>`;
+      section.appendChild(header);
+      container.appendChild(section);
+      return;
+    }
     total += mgrNews.length;
 
     const meta = MGR_META[key] || { label:key, emoji:"🏢" };
@@ -415,12 +455,13 @@ function buildAcordeon() {
 
 /* ── STATS ── */
 function updateStats() {
+  const total = typeof ALL_MANAGERS !== "undefined" ? ALL_MANAGERS.length : NEWS.length;
   const c={red:0,yellow:0,green:0};
   NEWS.forEach(n=>c[n.severity]++);
-  document.getElementById("cnt-total").textContent  = NEWS.length;
+  document.getElementById("cnt-total").textContent  = total;
   document.getElementById("cnt-red").textContent    = c.red;
   document.getElementById("cnt-yellow").textContent = c.yellow;
-  document.getElementById("cnt-green").textContent  = c.green;
+  document.getElementById("cnt-green").textContent  = total - c.red - c.yellow;
 }
 
 /* ── BANNER ── */

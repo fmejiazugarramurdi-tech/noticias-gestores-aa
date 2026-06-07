@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monitor Ampliado | Gestores Alternativos</title>
+<style>
+:root {
+  --bg:#f0f2f7; --surface:#fff; --surface2:#f7f8fc; --border:#e2e6f0;
+  --text:#1c2333; --text2:#5a6480; --accent:#2563eb; --accent-bg:#eff6ff;
+  --header-bg:#0f172a; --header-fg:#e2e8f0;
+  --shadow:0 2px 12px rgba(0,0,0,.08); --radius:10px;
+  --red:#dc2626; --red-bg:#fef2f2; --red-border:#fecaca;
+  --yellow:#d97706; --yellow-bg:#fffbeb; --yellow-border:#fde68a;
+  --green:#16a34a; --green-bg:#f0fdf4; --green-border:#bbf7d0;
+  --kw-bg:#f3e8ff; --kw-text:#7e22ce; --kw-border:#d8b4fe;
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --surface:#161b22; --surface2:#1c2128; --border:#30363d;
+  --text:#e6edf3; --text2:#8b949e; --accent:#58a6ff; --accent-bg:#1c2d41;
+  --header-bg:#010409; --header-fg:#c9d1d9; --shadow:0 2px 12px rgba(0,0,0,.4);
+  --red:#f87171; --red-bg:#2a1515; --red-border:#7f1d1d;
+  --yellow:#fbbf24; --yellow-bg:#2a2010; --yellow-border:#78350f;
+  --green:#4ade80; --green-bg:#102010; --green-border:#14532d;
+  --kw-bg:#2e1065; --kw-text:#c4b5fd; --kw-border:#6d28d9;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .25s,color .25s}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Header ── */
+header{background:var(--header-bg);color:var(--header-fg);padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.logo{font-size:1rem;font-weight:700;letter-spacing:.02em;white-space:nowrap;display:flex;align-items:center;gap:9px}
+.logo span{opacity:.5;font-weight:400;font-size:.8rem}
+.header-right{display:flex;align-items:center;gap:10px}
+#date-badge{font-size:.75rem;background:rgba(255,255,255,.1);border-radius:20px;padding:3px 10px;white-space:nowrap}
+.theme-btn{background:rgba(255,255,255,.12);border:none;color:var(--header-fg);border-radius:6px;width:34px;height:34px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.theme-btn:hover{background:rgba(255,255,255,.22)}
+
+/* ── Layout ── */
+main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+
+/* ── Stats ── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin-bottom:24px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.s-label{font-size:.72rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.s-value{font-size:1.65rem;font-weight:800}
+.stat-card.c-total .s-value{color:var(--accent)}
+.stat-card.c-red   .s-value{color:var(--red)}
+.stat-card.c-yel   .s-value{color:var(--yellow)}
+.stat-card.c-grn   .s-value{color:var(--green)}
+
+/* ── Controls ── */
+.controls{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.search-wrap{position:relative;flex:1;min-width:180px}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text2);pointer-events:none;font-size:.9rem}
+#search{width:100%;padding:8px 10px 8px 30px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s}
+#search:focus{border-color:var(--accent)}
+.sep{width:1px;height:26px;background:var(--border);flex-shrink:0}
+.fg{display:flex;gap:5px;align-items:center}
+.fg-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text2);white-space:nowrap;margin-right:2px}
+.fsel{padding:6px 10px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-size:.82rem;font-weight:600;cursor:pointer;outline:none;transition:border-color .15s}
+.fsel:hover,.fsel:focus{border-color:var(--accent)}
+.rc{font-size:.78rem;color:var(--text2);margin-left:auto;white-space:nowrap}
+
+/* ── Banner ── */
+.pbanner{background:var(--accent-bg);border:1px solid rgba(37,99,235,.3);border-radius:8px;padding:9px 14px;font-size:.82rem;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.pbanner.hidden{display:none}
+
+/* ── ACORDEÓN ── */
+.acordeon-list{display:flex;flex-direction:column;gap:10px}
+.mgr-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.mgr-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;background:var(--surface2);border-bottom:1px solid transparent;transition:background .2s,border-color .2s;gap:12px}
+.mgr-header:hover{background:var(--accent-bg);border-bottom-color:var(--accent)}
+.mgr-header.open{background:var(--accent-bg);border-bottom:1px solid var(--border)}
+.mgr-header-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.mgr-emoji{font-size:1.2rem;flex-shrink:0}
+.mgr-name{font-size:.95rem;font-weight:700;color:var(--text)}
+.mgr-header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mgr-pill{font-size:.65rem;font-weight:700;border-radius:20px;padding:3px 9px;border:1.5px solid;white-space:nowrap}
+.mgr-pill.has-red{background:var(--red-bg);color:var(--red);border-color:var(--red-border)}
+.mgr-pill.has-yellow{background:var(--yellow-bg);color:var(--yellow);border-color:var(--yellow-border)}
+.mgr-pill.all-green{background:var(--green-bg);color:var(--green);border-color:var(--green-border)}
+.mgr-count{font-size:.72rem;color:var(--text2);white-space:nowrap}
+.mgr-chevron{font-size:.75rem;color:var(--text2);transition:transform .25s}
+.mgr-chevron.open{transform:rotate(180deg)}
+.mgr-body{display:none;padding:16px 20px}
+.mgr-body.open{display:block}
+
+/* ── Grupos severidad ── */
+.sev-group{margin-bottom:18px}
+.sev-group:last-child{margin-bottom:0}
+.sev-group-header{display:flex;align-items:center;gap:7px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.sev-group-header.red{color:var(--red)}
+.sev-group-header.yellow{color:var(--yellow)}
+.sev-group-header.green{color:var(--green)}
+
+/* ── Tarjetas ── */
+.news-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);overflow:hidden;display:flex;transition:transform .15s,box-shadow .15s;margin-bottom:8px}
+.news-card:last-child{margin-bottom:0}
+.news-card:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.12)}
+.cbar{width:5px;flex-shrink:0}
+.cbar.red{background:var(--red)}
+.cbar.yellow{background:var(--yellow)}
+.cbar.green{background:var(--green)}
+.ci{padding:13px 18px;flex:1;min-width:0}
+.ct{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.card-title{font-size:.94rem;font-weight:700;color:var(--text);line-height:1.38;flex:1}
+.card-meta{font-size:.74rem;color:var(--text2);margin-bottom:7px}
+.card-body{font-size:.875rem;color:var(--text2);line-height:1.6}
+.card-body strong{color:var(--text)}
+.card-src{margin-top:9px;font-size:.74rem;display:flex;gap:7px;flex-wrap:wrap;color:var(--text2)}
+.card-src a{color:var(--accent)}
+
+/* ── Keyword badges ── */
+.kw-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
+.kw-badge{font-size:.62rem;font-weight:700;background:var(--kw-bg);color:var(--kw-text);border:1px solid var(--kw-border);border-radius:4px;padding:2px 7px;text-transform:uppercase;letter-spacing:.04em}
+
+/* ── Empty ── */
+#empty{display:none;text-align:center;padding:60px 20px;color:var(--text2)}
+#empty p{font-size:.9rem;margin-top:12px}
+
+/* ── Footer ── */
+footer{text-align:center;font-size:.74rem;color:var(--text2);padding:24px 20px 32px;line-height:1.7}
+
+@media(max-width:640px){
+  .logo span{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .sep{display:none}
+  .mgr-count{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">📊 Monitor Ampliado <span>/ Gestores Alternativos Internacionales</span></div>
+    <div class="header-right">
+      <div id="date-badge">Actualizado: <span id="last-update"></span></div>
+      <button class="theme-btn" id="themeBtn" title="Modo oscuro">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="stats-grid">
+    <div class="stat-card c-total"><div class="s-label">Total noticias</div><div class="s-value" id="cnt-total">0</div></div>
+    <div class="stat-card c-red">  <div class="s-label">⚠ Graves</div>   <div class="s-value" id="cnt-red">0</div></div>
+    <div class="stat-card c-yel">  <div class="s-label">! Atención</div>  <div class="s-value" id="cnt-yellow">0</div></div>
+    <div class="stat-card c-grn">  <div class="s-label">✓ Normales</div>  <div class="s-value" id="cnt-green">0</div></div>
+  </div>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Buscar en noticias…" autocomplete="off"/>
+    </div>
+    <div class="sep"></div>
+    <div class="fg">
+      <span class="fg-label">Prioridad</span>
+      <select class="fsel" id="sel-severity">
+        <option value="negative" selected>🔴🟡 Negativas</option>
+        <option value="all">Todas</option>
+        <option value="red">⚠ Grave</option>
+        <option value="yellow">! Atención</option>
+        <option value="green">✓ Normal</option>
+      </select>
+    </div>
+    <div class="sep"></div>
+    <div class="fg">
+      <span class="fg-label">Período</span>
+      <select class="fsel" id="sel-period">
+        <option value="all" selected>Todos los meses</option>
+      </select>
+    </div>
+    <div class="sep"></div>
+    <div class="fg">
+      <span class="fg-label">Gestor</span>
+      <select class="fsel" id="sel-manager">
+        <option value="all" selected>Todos</option>
+      </select>
+    </div>
+    <div class="sep"></div>
+    <div class="fg">
+      <span class="fg-label">Keyword</span>
+      <select class="fsel" id="sel-keyword">
+        <option value="all" selected>Todas</option>
+        <option value="fraud">Fraud</option>
+        <option value="tax fraud">Tax Fraud</option>
+        <option value="lawsuit">Lawsuit</option>
+        <option value="fined">Fined</option>
+        <option value="fiduciary">Fiduciary Duty</option>
+        <option value="sues">Sues</option>
+        <option value="cyber attack">Cyber Attack</option>
+      </select>
+    </div>
+    <div class="rc" id="rc"></div>
+  </div>
+
+  <div class="pbanner hidden" id="pbanner">📅 <strong id="prange"></strong></div>
+
+  <div class="acordeon-list" id="acordeon"></div>
+
+  <div id="empty">
+    <svg width="44" height="44" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+        d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+    </svg>
+    <p>No hay noticias con los filtros seleccionados.</p>
+  </div>
+</main>
+
+<footer>
+  Monitor Ampliado de Gestores Alternativos Internacionales · Período base: 28–31 mayo 2026<br/>
+  Fuentes: Bloomberg · Reuters · FT · Courthouse News · CMF Chile · SEC EDGAR · La Tercera · Diario Financiero
+</footer>
+
+<script src="news-data-v2.js"></script>
+<script>
+/* ── MANAGERS (generados dinámicamente desde NEWS) ── */
+const MGR_META = {
+  brookfield:    { label:"Brookfield Asset Management", emoji:"🏗️" },
+  larrainvial:   { label:"LarrainVial Activos AGF",     emoji:"⚖️" },
+  partnersgroup: { label:"Partners Group",              emoji:"🇨🇭" },
+  grupopatio:    { label:"Grupo Patio",                 emoji:"🏢" },
+  redmegacentro: { label:"Red Megacentro",              emoji:"🏭" },
+  onestream:     { label:"OneStream",                   emoji:"💻" },
+  credicorp:     { label:"Credicorp Capital",           emoji:"🦙" },
+  hellmanfriedman:{ label:"Hellman & Friedman",         emoji:"🦅" },
+  thomabravo:    { label:"Thoma Bravo",                 emoji:"🔐" },
+  toesca:        { label:"Toesca AGF",                  emoji:"📋" },
+  moneda:        { label:"Moneda Asset Management",     emoji:"🪙" },
+  harbourvest:   { label:"HarbourVest Partners",        emoji:"⚓" },
+  flintglobal:   { label:"Flint Global",                emoji:"🔥" },
+  patiocomer:    { label:"Patio Comercial",             emoji:"🏪" },
+  linkcapital:   { label:"Link Capital Partners AGF",   emoji:"🔗" },
+  volcom:        { label:"Volcom Capital AGF",          emoji:"🌊" },
+  warburgpincus: { label:"Warburg Pincus",              emoji:"🌐" },
+};
+
+const SEV_ORDER = ["red","yellow","green"];
+const SEV_LABEL = { red:"🔴 Grave", yellow:"🟡 Atención", green:"🟢 Normal" };
+const KW_LABEL  = {
+  "fraud":"Fraud","tax fraud":"Tax Fraud","lawsuit":"Lawsuit",
+  "fined":"Fined","fiduciary":"Fiduciary Duty","sues":"Sues","cyber attack":"Cyber Attack"
+};
+
+/* ── ESTADO ── */
+let activeSev  = "negative";
+let activePer  = "all";
+let activeMgr  = "all";
+let activeKw   = "all";
+let searchQ    = "";
+const openSecs = new Set();
+
+/* ── FECHA ── */
+function updateLastDate() {
+  const last = NEWS.map(n=>n.isoDate).sort().reverse()[0];
+  const d = new Date(last+"T12:00:00");
+  document.getElementById("last-update").textContent =
+    d.toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"});
+}
+
+/* ── MESES DINÁMICOS ── */
+function buildMonthOptions() {
+  const seen = new Set();
+  NEWS.forEach(n => seen.add(n.isoDate.slice(0,7)));
+  const months = [...seen].sort((a,b) => b.localeCompare(a));
+  const sel = document.getElementById("sel-period");
+  while(sel.options.length > 1) sel.remove(1);
+  months.forEach(key => {
+    const [y,m] = key.split("-");
+    const d = new Date(+y,+m-1,1);
+    const label = d.toLocaleDateString("es-ES",{month:"long",year:"numeric"});
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = label.charAt(0).toUpperCase()+label.slice(1);
+    sel.appendChild(opt);
+  });
+}
+
+/* ── MANAGERS DINÁMICOS ── */
+function buildManagerOptions() {
+  const seen = new Set();
+  NEWS.forEach(n => seen.add(n.manager));
+  const sel = document.getElementById("sel-manager");
+  while(sel.options.length > 1) sel.remove(1);
+  [...seen].sort().forEach(key => {
+    const meta = MGR_META[key] || { label: key };
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = meta.label;
+    sel.appendChild(opt);
+  });
+}
+
+/* ── FILTRADO ── */
+function matchSev(s) {
+  if(activeSev==="all") return true;
+  if(activeSev==="negative") return s==="red"||s==="yellow";
+  return s===activeSev;
+}
+function inPeriod(iso) {
+  if(activePer==="all") return true;
+  return iso.slice(0,7)===activePer;
+}
+function matchKw(kws) {
+  if(activeKw==="all") return true;
+  return kws.includes(activeKw);
+}
+function getFiltered() {
+  return NEWS.filter(n =>
+    matchSev(n.severity) &&
+    inPeriod(n.isoDate) &&
+    (activeMgr==="all" || n.manager===activeMgr) &&
+    matchKw(n.keywords||[]) &&
+    (!searchQ || (n.title+" "+n.body+" "+n.managerLabel).toLowerCase().includes(searchQ))
+  );
+}
+
+/* ── CARD ── */
+function buildCard(n) {
+  const srcs = n.sources.map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`).join(" · ");
+  const kws  = (n.keywords||[]).map(k=>`<span class="kw-badge">${KW_LABEL[k]||k}</span>`).join("");
+  const card = document.createElement("div");
+  card.className = "news-card";
+  card.innerHTML = `
+    <div class="cbar ${n.severity}"></div>
+    <div class="ci">
+      ${kws ? `<div class="kw-badges">${kws}</div>` : ""}
+      <div class="ct"><div class="card-title">${n.title}</div></div>
+      <div class="card-meta">📅 ${n.date}</div>
+      <div class="card-body">${n.body}</div>
+      <div class="card-src">Fuentes: ${srcs}</div>
+    </div>`;
+  return card;
+}
+
+/* ── ACORDEÓN ── */
+function buildAcordeon() {
+  const container = document.getElementById("acordeon");
+  container.innerHTML = "";
+  const filtered = getFiltered();
+  let total = 0;
+
+  // Agrupar por manager en el orden en que aparecen en MGR_META
+  const mgrKeys = Object.keys(MGR_META);
+  const extra = [...new Set(NEWS.map(n=>n.manager))].filter(k=>!mgrKeys.includes(k));
+  const allKeys = [...mgrKeys, ...extra];
+
+  allKeys.forEach(key => {
+    const mgrNews = filtered.filter(n=>n.manager===key)
+      .sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate));
+    if(!mgrNews.length) return;
+    total += mgrNews.length;
+
+    const meta = MGR_META[key] || { label:key, emoji:"🏢" };
+    const hasRed    = mgrNews.some(n=>n.severity==="red");
+    const hasYellow = mgrNews.some(n=>n.severity==="yellow");
+    let pillClass, pillText;
+    if(hasRed)         { pillClass="has-red";    pillText="🔴 Alerta grave"; }
+    else if(hasYellow) { pillClass="has-yellow";  pillText="🟡 Atención"; }
+    else               { pillClass="all-green";   pillText="🟢 Sin alertas"; }
+
+    const isOpen = openSecs.has(key);
+    const section = document.createElement("div");
+    section.className = "mgr-section";
+
+    const header = document.createElement("div");
+    header.className = "mgr-header"+(isOpen?" open":"");
+    header.innerHTML = `
+      <div class="mgr-header-left">
+        <span class="mgr-emoji">${meta.emoji}</span>
+        <span class="mgr-name">${meta.label}</span>
+      </div>
+      <div class="mgr-header-right">
+        <span class="mgr-pill ${pillClass}">${pillText}</span>
+        <span class="mgr-count">${mgrNews.length} noticia${mgrNews.length!==1?"s":""}</span>
+        <span class="mgr-chevron ${isOpen?"open":""}">▼</span>
+      </div>`;
+
+    const body = document.createElement("div");
+    body.className = "mgr-body"+(isOpen?" open":"");
+
+    SEV_ORDER.forEach(sev => {
+      const grupo = mgrNews.filter(n=>n.severity===sev);
+      if(!grupo.length) return;
+      const grupoDiv = document.createElement("div");
+      grupoDiv.className = "sev-group";
+      grupoDiv.innerHTML = `<div class="sev-group-header ${sev}">${SEV_LABEL[sev]} <span style="font-weight:400;opacity:.7">(${grupo.length})</span></div>`;
+      grupo.forEach(n => grupoDiv.appendChild(buildCard(n)));
+      body.appendChild(grupoDiv);
+    });
+
+    header.addEventListener("click", () => {
+      const nowOpen = body.classList.contains("open");
+      body.classList.toggle("open", !nowOpen);
+      header.classList.toggle("open", !nowOpen);
+      header.querySelector(".mgr-chevron").classList.toggle("open", !nowOpen);
+      nowOpen ? openSecs.delete(key) : openSecs.add(key);
+    });
+
+    section.appendChild(header);
+    section.appendChild(body);
+    container.appendChild(section);
+  });
+
+  document.getElementById("rc").textContent =
+    total===NEWS.length ? "" : `${total} de ${NEWS.length} noticias`;
+  document.getElementById("empty").style.display = total===0 ? "block" : "none";
+}
+
+/* ── STATS ── */
+function updateStats() {
+  const c={red:0,yellow:0,green:0};
+  NEWS.forEach(n=>c[n.severity]++);
+  document.getElementById("cnt-total").textContent  = NEWS.length;
+  document.getElementById("cnt-red").textContent    = c.red;
+  document.getElementById("cnt-yellow").textContent = c.yellow;
+  document.getElementById("cnt-green").textContent  = c.green;
+}
+
+/* ── BANNER ── */
+function updateBanner() {
+  const banner = document.getElementById("pbanner");
+  const label  = document.getElementById("prange");
+  if(activePer==="all"){banner.classList.add("hidden");return;}
+  banner.classList.remove("hidden");
+  const [y,m] = activePer.split("-");
+  const d = new Date(+y,+m-1,1);
+  const mes = d.toLocaleDateString("es-ES",{month:"long",year:"numeric"});
+  label.textContent = `Mostrando: ${mes.charAt(0).toUpperCase()+mes.slice(1)}`;
+}
+
+/* ── EVENTOS ── */
+document.getElementById("sel-severity").addEventListener("change",e=>{activeSev=e.target.value;buildAcordeon()});
+document.getElementById("sel-period")  .addEventListener("change",e=>{activePer=e.target.value;updateBanner();buildAcordeon()});
+document.getElementById("sel-manager") .addEventListener("change",e=>{activeMgr=e.target.value;buildAcordeon()});
+document.getElementById("sel-keyword") .addEventListener("change",e=>{activeKw=e.target.value;buildAcordeon()});
+document.getElementById("search")      .addEventListener("input", e=>{searchQ=e.target.value.toLowerCase().trim();buildAcordeon()});
+
+/* ── TEMA OSCURO ── */
+const themeBtn = document.getElementById("themeBtn");
+function setTheme(dark){
+  document.documentElement.dataset.theme = dark?"dark":"light";
+  themeBtn.textContent = dark?"☀️":"🌙";
+  localStorage.setItem("theme-v2",dark?"dark":"light");
+}
+themeBtn.addEventListener("click",()=>setTheme(document.documentElement.dataset.theme!=="dark"));
+const saved = localStorage.getItem("theme-v2");
+if(saved) setTheme(saved==="dark");
+
+/* ── INICIO ── */
+buildMonthOptions();
+buildManagerOptions();
+updateLastDate();
+updateStats();
+updateBanner();
+buildAcordeon();
+</script>
+</body>
+</html>

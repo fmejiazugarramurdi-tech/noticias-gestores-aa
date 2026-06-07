@@ -15,7 +15,7 @@ const NEWS = [
     severity: "red",
     keywords: ["fraud", "lawsuit", "fiduciary"],
     title: "Demanda Raffaelli: ex-socio acusa desvío de capital, inflación de balance y represalia al whistleblower",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "12 de mayo de 2026", isoDate: "2026-05-12",
     body: `Josh Raffaelli, ex-managing partner de Brookfield, presentó una demanda de 100 páginas acusando a la firma de <strong>desviar capital</strong> de fondos bajo su gestión para cubrir pérdidas en real estate comercial, de <strong>inflar artificialmente</strong> el balance de Pinegrove Capital Partners en más de $100M, y de limitar el acceso de clientes a xAI de Elon Musk. Raffaelli denunció ante la <strong>SEC</strong> y fue despedido en diciembre 2024. Brookfield niega todas las acusaciones.`,
     sources: [
       { label: "Courthouse News", url: "https://www.courthousenews.com/silicon-valley-investor-with-ties-to-elon-musk-accuses-brookfield-of-fraud-retaliation/" },
@@ -28,7 +28,7 @@ const NEWS = [
     severity: "red",
     keywords: ["fraud", "fined", "fiduciary", "lawsuit"],
     title: "CMF multa con UF 60.000 por caso Factop: activos sobrevalorados y engaño a inversores — recurso activo en Corte de Apelaciones",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "25 de agosto de 2025", isoDate: "2025-08-25",
     body: `La CMF aplicó multas por un total de <strong>UF 160.000 (~US$4,73M)</strong> a LarrainVial Activos AGF y exejecutivos por inducir a inversores a comprar cuotas del Fondo Capital Estructurado I mediante <strong>recursos engañosos</strong>, valorando créditos deteriorados de Antonio Jalaff como si fueran participación indirecta en Grupo Patio. La Corte Suprema confirmó en octubre 2025 la suspensión del proceso penal para los ejecutivos. El reclamo de ilegalidad contra las multas regulatorias sigue activo en la Corte de Apelaciones de Santiago en 2026.`,
     sources: [
       { label: "La Tercera", url: "https://www.latercera.com/pulso/noticia/cmf-multa-a-administradora-larrain-vial-activos-stf-capital-corredora-de-bolsa-exgerentes-y-exdirectores/" },
@@ -41,7 +41,7 @@ const NEWS = [
     severity: "red",
     keywords: ["fraud", "lawsuit", "sues"],
     title: "Partners Group demanda a Grizzly Research por informe que acusó inflación de software y comparó la firma con el mayor fraude corporativo alemán",
-    date: "30 de mayo de 2026", isoDate: "2026-05-30",
+    date: "29 de mayo de 2026", isoDate: "2026-05-29",
     body: `El chairman Steffen Meister confirmó el inicio de <strong>procedimientos legales contra Grizzly Research</strong>, el short seller cuyo informe de abril 2026 acusó a Partners Group de inflar su exposición a software y comparó sus prácticas de valoración con el escándalo Wirecard. Partners Group rechazó las alegaciones como "frívolas, defamatorias y altamente engañosas" y reportó <strong>posible manipulación de mercado</strong> a reguladores en Suiza y EE.UU. La acción cayó a mínimos anuales.`,
     sources: [
       { label: "Ad-hoc-news", url: "https://www.ad-hoc-news.de/boerse/news/ueberblick/defamation-suit-and-a-new-income-fund-partners-group-s-two-front/69449112" },
@@ -54,7 +54,7 @@ const NEWS = [
     severity: "red",
     keywords: ["fraud", "lawsuit", "fiduciary"],
     title: "Caso Factop: Antonio Jalaff querellado por estafa — directores de Grupo Patio declaran haber sido engañados",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "26 de noviembre de 2025", isoDate: "2025-11-26",
     body: `En el marco del caso Factop, Antonio Jalaff impulsó un esquema en que ejecutivos de LarrainVial y STF Capital <strong>comercializaron cuotas de un fondo usando el logo de Grupo Patio</strong> sin autorización, prometiendo una participación indirecta del 3,87% en el grupo que nunca se concretó. La CMF remitió antecedentes al Ministerio Público para investigar responsabilidades penales. Directores de Grupo Patio declararon ante la Fiscalía haber sido víctimas del engaño.`,
     sources: [
       { label: "Diario Financiero", url: "https://www.df.cl/mercados/bolsa-monedas/una-enorme-mentira-y-una-canallada-directores-de-grupo-patio-declaran" },
@@ -67,7 +67,7 @@ const NEWS = [
     severity: "red",
     keywords: ["lawsuit", "fiduciary"],
     title: "Accionista minoritario fundador inicia tres arbitrajes acusando administración desleal y operaciones irregulares",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "23 de enero de 2025", isoDate: "2025-01-23",
     body: `Felipe Guzmán, accionista fundador con el 5,32% de Red Megacentro, inició <strong>tres arbitrajes</strong> ante tribunales civiles y el CAM Santiago contra directores y ejecutivos de la compañía, acusándolos de <strong>administración desleal, operaciones con partes relacionadas y violación al pacto de accionistas</strong>. La empresa negó las acusaciones y anunció acciones legales contra quienes intenten dañar su reputación.`,
     sources: [
       { label: "La Tercera", url: "https://www.latercera.com/pulso/noticia/socio-minoritario-de-red-megacentro-inicia-tres-arbitrajes-y-denuncia-multiples-irregularidades/B4ZF3L2JZVBX5COIRU4IBEX4CQ/" },
@@ -80,7 +80,7 @@ const NEWS = [
     severity: "red",
     keywords: ["lawsuit", "fiduciary"],
     title: "Inversores demandan a OneStream por take-private de $6.400M con Hg Capital alegando incumplimiento de deberes fiduciarios",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "23 de febrero de 2026", isoDate: "2026-02-23",
     body: `Un inversor demandó a OneStream (NASDAQ: OS) para detener la operación de <strong>take-private por $6.400M</strong> liderada por Hg Capital, alegando que la empresa no entregó suficiente información sobre cómo el PE persuadió al fundador Thomas Shea a aceptar los $24/acción. Múltiples firmas de derechos de accionistas investigaron si el directorio incumplió sus <strong>deberes fiduciarios</strong>.`,
     sources: [
       { label: "Bloomberg Law", url: "https://news.bloomberglaw.com/litigation/onestream-investor-sues-to-stop-6-4-billion-take-private-deal" },
@@ -95,7 +95,7 @@ const NEWS = [
     severity: "yellow",
     keywords: ["fined", "lawsuit"],
     title: "SMV peruana mantiene multa de 510 UIT por contribuciones políticas no declaradas — cassation pendiente en Corte Suprema",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "27 de febrero de 2026", isoDate: "2026-02-27",
     body: `La Superintendencia del Mercado de Valores (SMV) de Perú <strong>multó a Credicorp con 510 UIT (~S/1,9M)</strong> por violaciones graves vinculadas a contribuciones políticas no declaradas en 2011 y 2016. En febrero 2026 el SMV requirió explicar por qué no se declaró como hecho relevante. El recurso de cassation ante la Corte Suprema peruana sigue pendiente.`,
     sources: [{ label: "StockTitan", url: "https://www.stocktitan.net/sec-filings/BAP/6-k-credicorp-ltd-current-report-foreign-issuer-10f4a142b558.html" }]
   },
@@ -105,7 +105,7 @@ const NEWS = [
     severity: "yellow",
     keywords: ["lawsuit"],
     title: "Credicorp Capital compra US$125,3M en cuotas de clientes afectados por quiebra de Sartor AGF",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "30 de diciembre de 2024", isoDate: "2024-12-30",
     body: `Credicorp Capital se comprometió a adquirir el <strong>100% de las inversiones de sus clientes</strong> en dos fondos afectados por la revocación de autorización de Sartor AGF por la CMF, cubriendo hasta <strong>US$125,3M</strong>. Credicorp espera recuperación parcial y ejerce acciones legales contra los responsables.`,
     sources: [{ label: "StockTitan", url: "https://www.stocktitan.net/news/BAP/credicorp-ltd-announces-that-one-of-its-subsidiaries-offers-to-y90ysmx8urd1.html" }]
   },
@@ -115,7 +115,7 @@ const NEWS = [
     severity: "yellow",
     keywords: ["lawsuit", "fiduciary"],
     title: "Demanda en Delaware acusa a H&F de priorizar su salida en venta de Snap One a Resideo por $1.400M",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "26 de junio de 2025", isoDate: "2025-06-26",
     body: `Un inversor demandó a Hellman & Friedman, JPMorgan y Moelis en la Corte de Chancery de Delaware, alegando que la venta de Snap One a Resideo Technologies por <strong>$1.400M</strong> priorizó el interés de H&F sobre su obligación de maximizar el precio para los accionistas públicos. La demanda acusa el uso de <strong>"orientación manipulada"</strong> para justificar un precio en el rango bajo de valoración.`,
     sources: [{ label: "Bloomberg Law", url: "https://news.bloomberglaw.com/esg/jpmorgan-hellman-friedman-moelis-sued-over-1-4-billion-deal" }]
   },
@@ -125,7 +125,7 @@ const NEWS = [
     severity: "yellow",
     keywords: ["lawsuit"],
     title: "Pérdida de $5.000M en Medallia expone riesgo sistémico en cartera de software",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "29 de abril de 2026", isoDate: "2026-04-29",
     body: `Thoma Bravo enfrenta escrutinio público tras la pérdida de <strong>~$5.000M</strong> en su inversión en Medallia, descrita como uno de los mayores fracasos en la historia del PE de software. Intensifica las dudas sobre valoraciones de cartera de software en el sector.`,
     sources: [{ label: "Puck News", url: "https://puck.news/five-billion-dollar-private-equity-wipeout-thoma-bravos-medallia-miss/" }]
   },
@@ -135,7 +135,7 @@ const NEWS = [
     severity: "yellow",
     keywords: ["fiduciary"],
     title: "CMF designa a Toesca AGF como liquidadora de Sartor AGF — fondos con caídas de hasta 85%",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "14 de agosto de 2025", isoDate: "2025-08-14",
     body: `La CMF designó a <strong>Toesca AGF como liquidadora</strong> de los fondos de inversión rescatables de Sartor AGF, cuya intervención se ordenó por graves irregularidades. PwC y Deloitte revelaron <strong>caídas de hasta 85%</strong> en los fondos. Toesca realizará un proceso de venta de los instrumentos remanentes en un plazo de 36 meses.`,
     sources: [
       { label: "Diario Financiero", url: "https://www.df.cl/mercados/fondos-de-inversion/sartor-informes-de-pwc-y-deloitte-revelaron-caidas-de-hasta-85-en-fondos" },
@@ -148,7 +148,7 @@ const NEWS = [
     severity: "yellow",
     keywords: ["lawsuit"],
     title: "Moneda evalúa acciones legales contra exresponsables de Nova Austral tras pérdida de US$30M",
-    date: "28 de mayo de 2026", isoDate: "2026-05-28",
+    date: "15 de enero de 2025", isoDate: "2025-01-15",
     body: `Moneda Asset Management, con <strong>US$30M invertidos en Nova Austral</strong>, evaluaba acciones legales contra los exresponsables de la firma salmonera, cuyas deudas totales ascienden a <strong>US$559M</strong>. Nova Austral enfrenta cargos criminales y multas por reporte fraudulento de mortalidad de peces.`,
     sources: [{ label: "SeafoodSource", url: "https://www.seafoodsource.com/news/premium/business-finance/investor-sues-former-managers-directors-of-beleaguered-nova-austral-for-fraud" }]
   },
